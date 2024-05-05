@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Character Creator</title>
+<style>
+    body { font-family: Arial, sans-serif; }
+    #traitSelection { display: flex; justify-content: center; margin-bottom: 0px; }
+    select { margin-right: 0px; }
+    #characterDisplay { position: relative; width: 600px; height: 600px; border: 1px solid black; margin: 20px auto; }
+    #characterDisplay img { position: absolute; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+
+<div id="traitSelection">
+  <select id="hairSelect" onchange="selectTrait('hair', this.value)">
+    <option value="">Select HAIRSTYLE</option>
+    <option value="HAIR/IMG_1358.PNG">BROWN MESSY</option>
+    <option value="HAIR/IMG_1371.PNG">BLONDE SIDE</option>
+    <option value="IMAGES/IMG_1361.PNG">Curly Hair</option>
+    <option value="IMAGES/IMG_1362.PNG">NO HAIR</option>
+  </select>
+  <select id="hatSelect" onchange="selectTrait('hat', this.value)">
+    <option value="">Select HEADWEAR</option>
+    <option value="HATS/BACKREDWHITE.PNG">RED HAT BACKWARDS</option>
+    <option value="HATS/TACO.PNG">TACO</option>
+    <option value="HATS/BEANIE BLACK.PNG">Curly Hair</option>
+    <option value="HATS/SIDEBLACK.PNG">SIDE BLACK HAT</option>
+  </select>
+  <select id="faceSelect" onchange="selectTrait('face', this.value)">
+    <option value="">Select Face</option>
+    <option value="FACE/IMG_1681.PNG">Smiling Face</option>
+    <option value="FACE/IMG_1682.PNG">Serious Face</option>
+    <option value="FACE/IMG_1683.PNG">Laughing Face</option>
+    <option value="FACE/IMG_1684.PNG">Surprised Face</option>
+  </select>
+  <select id="skinSelect" onchange="selectTrait('skin', this.value)">
+    <option value="">Select Skin Color</option>
+    <option value="SKIN/IMG_1344.PNG">Fair Skin</option>
+    <option value="SKIN/IMG_1345.PNG">Medium Skin</option>
+    <option value="SKIN/IMG_1346.PNG">Dark Skin</option>
+    <option value="SKIN/IMG_1347.PNG">Tanned Skin</option>
+  </select>
+  <select id="clothingSelect" onchange="selectTrait('clothing', this.value)">
+    <option value="">Select Clothing</option>
+    <option value="CLOTHING/IMG_1543.PNG">RED HOODIE</option>
+    <option value="CLOTHING/IMG_1541.PNG">WHITE HOODIE</option>
+    <option value="CLOTHING/IMG_1339.PNG">ORANGE FARMER</option>
+    <option value="CLOTHING/IMG_1341.PNG">TEAL FARMER</option>
+  </select>
+  <select id="backgroundSelect" onchange="selectTrait('background', this.value)">
+    <option value="">Select Background</option>
+    <option value="BACKGROUNDS/IMG_1529.PNG">PEACH</option>
+    <option value="BACKGROUNDS/IMG_1530.PNG">RED</option>
+    <option value="BACKGROUNDS/IMG_1531.PNG">GREEN</option>
+    <option value="BACKGROUNDS/IMG_1532.PNG">YELLOW</option>
+  </select>
+  <select id="accessoriesSelect" onchange="selectTrait('accessories', this.value)">
+    <option value="">Select Accessories</option>
+    <option value="GLASSES/IMG_1334.PNG">SKI GOGGLES</option>
+    <option value="GLASSES/IMG_1335.PNG">3D GLASSES</option>
+    <option value="GLASSES/IMG_1336.PNG">INCOGNITO</option>
+    <option value="GLASSES/IMG_1337.PNG">SPACE</option>
+  </select>
+</div>
+
+<div id="characterDisplay">
+  <img id="background" src="" alt="Background">
+  <img id="clothing" src="" alt="Clothing">
+  <img id="skin" src="" alt="Skin Color">
+  <img id="face" src="" alt="Face">
+  <img id="hair" src="" alt="Hair/Headwear">
+  <img id="accessories" src="" alt="Accessories">
+</div>
+
+<script>
+function selectTrait(category, filename) {
+  if (filename) {
+    document.getElementById(category).src = filename;
+  }
+}
+</script>
+
+</body>
+</html>

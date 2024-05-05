@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Thumbnail Picker</title>
+<style>
+  .thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+  }
+  .thumbnail {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .thumbnail.selected {
+    border-color: #0066cc;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="thumbnail-grid">
+  <div class="thumbnail" onclick="selectThumbnail(this)">
+    <img src="path/to/image1.jpg" alt="Option 1">
+  </div>
+  <div class="thumbnail" onclick="selectThumbnail(this)">
+    <img src="path/to/image2.jpg" alt="Option 2">
+  </div>
+  <!-- More thumbnails -->
+</div>
+
+<script>
+  function selectThumbnail(element) {
+    var thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach(thumb => thumb.classList.remove('selected'));
+    element.classList.add('selected');
+    // Optional: Set a hidden input value if used in a form
+  }
+</script>
+</body>
+</html>

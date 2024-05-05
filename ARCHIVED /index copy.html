@@ -77,15 +77,6 @@ function selectTrait(category, filename) {
 </html>
 
 <div id="traitSelection">
- <select id="backgroundSelect" onchange="selectTrait('background', this.value)">
-    <option value="">BACKGROUND</option>
-    <option value="BACKGROUNDS/1.PNG">NO BACKGROUND</option>
-    <option value="BACKGROUNDS/IMG_1529.PNG">PEACH</option>
-    <option value="BACKGROUNDS/IMG_1530.PNG">RED</option>
-    <option value="BACKGROUNDS/IMG_1531.PNG">GREEN</option>
-    <option value="BACKGROUNDS/IMG_1532.PNG">YELLOW</option>
-  </select>
-
   <select id="hairSelect" onchange="selectTrait('hair', this.value)">
     <option value="">HAIRSTYLE</option>
     <option value="HAIR/A.PNG">NO HAIR</option>
@@ -122,25 +113,22 @@ function selectTrait(category, filename) {
   <select id="faceSelect" onchange="selectTrait('face', this.value)">
     <option value="">FACE</option>
     <option value="FACE/A.PNG">NO FACE</option>
-    <option value="FACE/1.PNG">HAPPY 1</option>
-    <option value="FACE/1A.PNG">HAPPY 2</option>
-    <option value="FACE/2.PNG">UNSURE</option>
-    <option value="FACE/3.PNG">DETERMINED</option>
-    <option value="FACE/4.PNG">ANGRY 1</option>
-    <option value="FACE/5.PNG">ANGRY 2</option>
-    <option value="FACE/6.PNG">NOT IMPRESSED</option>
+    <option value="FACE/1.PNG">HAPPY</option>
+    <option value="FACE/2.PNG">ANGRY Face</option>
+    <option value="FACE/IMG_1683.PNG">Laughing Face</option>
+    <option value="FACE/IMG_1684.PNG">Surprised Face</option>
   </select>
   <select id="skinSelect" onchange="selectTrait('skin', this.value)">
     <option value="">HEAD</option>
-    <option value="SKIN/A.PNG">NO SKIN</option>
-    <option value="SKIN/1.PNG">SKIN 1</option>
-    <option value="SKIN/2.PNG">SKIN 2</option>
-    <option value="SKIN/3.PNG">SKIN 3</option>
-    <option value="SKIN/4.PNG">SKIN 4</option>
+    <option value="SKIN/A.PNG">NO HEAD</option>
+    <option value="SKIN/1.PNG">Fair Skin</option>
+    <option value="SKIN/2.PNG">Medium Skin</option>
+    <option value="SKIN/3.PNG">Dark Skin</option>
+    <option value="SKIN/4.PNG">Tanned Skin</option>
   </select>
   <select id="clothingSelect" onchange="selectTrait('clothing', this.value)">
     <option value="">CLOTHING</option>
-    <option value="CLOTHING/A.PNG">NO CLOTHING</option>
+    <option value="CLOTHING/A.PNG">NUDIE RUDIE</option>
     <option value="CLOTHING/1.PNG">WHITE HOODIE</option>
     <option value="CLOTHING/1A.PNG">WHITE HOODIE UP</option>
     <option value="CLOTHING/2.PNG">BLACK HOODIE</option>
@@ -171,7 +159,13 @@ function selectTrait(category, filename) {
     <option value="CLOTHING/19.PNG">BLUE VARSITY</option>
     <option value="CLOTHING/20.PNG">UNCLE SAM SUIT</option>
   </select>
- 
+  <select id="backgroundSelect" onchange="selectTrait('background', this.value)">
+    <option value="">BACKGROUND</option>
+    <option value="BACKGROUNDS/IMG_1529.PNG">PEACH</option>
+    <option value="BACKGROUNDS/IMG_1530.PNG">RED</option>
+    <option value="BACKGROUNDS/IMG_1531.PNG">GREEN</option>
+    <option value="BACKGROUNDS/IMG_1532.PNG">YELLOW</option>
+  </select>
   <select id="accessoriesSelect" onchange="selectTrait('accessories', this.value)">
     <option value="">GLASSES</option>
     <option value="GLASSES/A.PNG">NO GLASSES</option>
@@ -191,51 +185,37 @@ function selectTrait(category, filename) {
     <option value="HATS/2.PNG">BLACK BEANIE</option>
     <option value="HATS/4.PNG">WHITE BEANIE</option>
     <option value="HATS/3.PNG">GREEN BEANIE</option>
-    <option value="HATS/33.PNG">JPGPAPII HAT</option>
-    <option value="HATS/15.PNG">WHITE SIDEWAYS HAT</option>
-    <option value="HATS/16.PNG">BLONDE SIDEWAYS HAT</option>
-    <option value="HATS/17.PNG">BROWN SIDEWAYS HAT</option>
-    <option value="HATS/18.PNG">BLACK SIDEWAYS HAT</option>
-    <option value="HATS/19.PNG">WHITE HAIR RED BACKWARDS HAT</option>
-    <option value="HATS/20.PNG">WHITE HAIR BLACK BACKWARDS HAT</option>
-    <option value="HATS/21.PNG">WHITE HAIR BLUE BACKWARDS HAT</option>
-    <option value="HATS/22.PNG">BLONDE HAIR RED BACKWARDS HAT</option>
-    <option value="HATS/23.PNG">BLONDE HAIR BLACK BACKWARDS HAT</option>
-    <option value="HATS/24.PNG">BLONDE HAIR BLUE BACKWARDS HAT</option>
-    <option value="HATS/25.PNG">BROWN HAIR RED BACKWARDS HAT</option>
-    <option value="HATS/26.PNG">BROWN HAIR BLACK BACKWARDS HAT</option>
-    <option value="HATS/27.PNG">BROWN HAIR BLUE BACKWARDS HAT</option>
-    <option value="HATS/28.PNG">BLACK HAIR RED BACKWARDS HAT</option>
-    <option value="HATS/29.PNG">BLACK HAIR BLACK BACKWARDS HAT</option>
-    <option value="HATS/30.PNG">BLACK HAIR BLUE BACKWARDS HAT</option>
-    <option value="HATS/31.PNG">KNIGHT HELMET 1</option>
-    <option value="HATS/32.PNG">KNIGHT HELMET 2</option>
-    <option value="HATS/35.PNG">PIRATE HAT</option>
-    <option value="HATS/34.PNG">PIRATE HAT/EYEPATCH</option>
-    <option value="HATS/7.PNG">TACO HAT</option>
-    <option value="HATS/10.PNG">SAMURAI</option>
-    <option value="HATS/36.PNG">FIREMAN HAT</option>
-    <option value="HATS/37.PNG">WIZARD</option>
+    <option value="HATS/15.PNG">hat</option>
+    <option value="HATS/1.PNG">Baseball Cap</option>
+    <option value="HATS/2.PNG">Beanie</option>
+    <option value="HATS/3.PNG">Fedora</option>
+    <option value="HATS/7.PNG">Party Hat</option>
+    <option value="HATS/A.PNG">NO HAT</option>
+    <option value="HATS/16.PNG">BLONDE SIDE HAT</option>
+    <option value="HATS/20.PNG">BLACK BACKWARDS CAP</option>
+    <option value="HATS/3.PNG">Fedora</option>
+    <option value="HATS/7.PNG">Party Hat</option>
+    <option value="HATS/A.PNG">NO HAT</option>
+    <option value="HATS/1.PNG">Baseball Cap</option>
+    <option value="HATS/2.PNG">Beanie</option>
+    <option value="HATS/3.PNG">Fedora</option>
+    <option value="HATS/7.PNG">Party Hat</option>
+    <option value="HATS/A.PNG">NO HAT</option>
+    <option value="HATS/16.PNG">BLONDE SIDE HAT</option>
+    <option value="HATS/20.PNG">BLACK BACKWARDS CAP</option>
+    <option value="HATS/3.PNG">Fedora</option>
+    <option value="HATS/7.PNG">Party Hat</option>
+    <option value="HATS/A.PNG">NO HAT</option>
+    <option value="HATS/1.PNG">Baseball Cap</option>
+    <option value="HATS/2.PNG">Beanie</option>
+    <option value="HATS/3.PNG">Fedora</option>
     <option value="HATS/7.PNG">Party Hat</option>
   </select>
   <!-- Added new select for Hand Gestures -->
   <select id="handSelect" onchange="selectTrait('hand', this.value)">
     <option value="">HAND GESTURES</option>
-    <option value="HANDS/AA.PNG">NO HAND GESTURE</option>
     <option value="HANDS/1.PNG">GAMING CONTROLLER</option>
     <option value="HANDS/2.PNG">SNOWBALL</option>
-    <option value="HANDS/3.PNG">BASEBALL</option>
-    <option value="HANDS/4.PNG">SKIN 1 FINGER (FOR BALL)</option>
-    <option value="HANDS/5.PNG">SKIN 2 FINGER (FOR BALL)</option>
-    <option value="HANDS/6.PNG">SKIN 3 FINGER (FOR BALL)</option>
-    <option value="HANDS/7.PNG">SKIN 4 FINGER (FOR BALL)</option>
-</select>
-  <!-- Added new select for Balls -->
-  <select id="handSelect" onchange="selectTrait('ball', this.value)">
-    <option value="">BALLS</option>
-    <option value="HAND-BALLS/A.PNG">NO BALL</option>
-    <option value="HAND-BALLS/1.PNG">SOCCER BALL</option>
-    <option value="HAND-BALLS/2.PNG">BASKETBALL</option>
 
   </select>
 </div>
@@ -249,7 +229,6 @@ function selectTrait(category, filename) {
   <img id="clothing" src="" alt="Clothing">
   <img id="accessories" src="" alt="Accessories">
   <img id="hand" src="" alt="Hand Gesture">
-  <img id="ball" src="" alt="Balls">
 </div>
 
 <script>

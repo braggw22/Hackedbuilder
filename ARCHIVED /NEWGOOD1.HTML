@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Character Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    body { 
+        font-family: 'Baloo 2', cursive; /* Child-like, playful font */
+        background-color: #f4f4f9; 
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h1 {
+        color: #2a2a72;
+        margin-top: 5px;
+        font-size: 68px; /* Larger font size for the header */
+    }
+    #traitSelection { 
+        display: flex; 
+        justify-content: center; 
+        flex-wrap: wrap;
+        margin-bottom: 5px; 
+        padding: 20px;
+        background-color: #e2e2e5;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    select { 
+        margin: 10px;
+        padding: 15px; /* Increased padding for a more robust look */
+        border-radius: 20px; /* More pronounced rounded corners */
+        border: none; /* Removing the default border */
+        background-color: #FFD700; /* Bright color suitable for children */
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Soft shadow for depth */
+    }
+    select:hover {
+        background-color: #F0E68C; /* Slightly lighter color on hover */
+    }
+    #characterDisplay { 
+        position: relative; 
+        width: 600px; 
+        height: 600px; 
+        border: 3px solid #666; 
+        margin-top: 20px; 
+        background-color: #fff;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    #characterDisplay img { 
+        position: absolute; 
+        width: 100%; 
+        height: 100%; 
+    }
+</style>
+</head>
+<body>
+<h1>CREATE YOUR OWN LITTLE OLLIE</h1>
+<div id="traitSelection">
+  <select id="hairSelect" onchange="selectTrait('hair', this.value)">
+    <option value="">HAIRSTYLE</option>
+    <option value="HAIR/A.PNG">NO HAIR</option>
+    <option value="HAIR/1.PNG">WHITE SHORT</option>
+    <option value="HAIR/5.PNG">WHITE STYLED</option>
+    <option value="HAIR/9.PNG">WHITE BUSINESS</option>
+    <option value="HAIR/13.PNG">WHITE MESSY</option>
+    <option value="HAIR/17.PNG">WHITE SIDE</option>
+    <option value="HAIR/21.PNG">WHITE PART</option>
+    <option value="HAIR/2.PNG">BLONDE SHORT</option>
+    <option value="HAIR/6.PNG">BLONDE STYLED</option>
+    <option value="HAIR/10.PNG">BLONDE BUSINESS</option>
+    <option value="HAIR/14.PNG">BLONDE MESSY</option>
+    <option value="HAIR/18.PNG">BLONDE SIDE</option>
+    <option value="HAIR/22.PNG">BLONDE PART</option>
+    <option value="HAIR/3.PNG">BROWN SHORT</option>
+    <option value="HAIR/7.PNG">BROWN STYLED</option>
+    <option value="HAIR/11.PNG">BROWN BUSINESS</option>
+    <option value="HAIR/15.PNG">BROWN MESSY</option>
+    <option value="HAIR/19.PNG">BROWN SIDE</option>
+    <option value="HAIR/23.PNG">BROWN PART</option>
+    <option value="HAIR/4.PNG">BLACK SHORT</option>
+    <option value="HAIR/8.PNG">BLACK STYLED</option>
+    <option value="HAIR/12.PNG">BLACK BUSINESS</option>
+    <option value="HAIR/16.PNG">BLACK MESSY</option>
+    <option value="HAIR/20.PNG">BLACK SIDE</option>
+    <option value="HAIR/24.PNG">BLACK PART</option>
+  </select>
+  <select id="faceSelect" onchange="selectTrait('face', this.value)">
+    <option value="">FACE</option>
+    <option value="FACE/A.PNG">NO FACE</option>
+    <option value="FACE/1.PNG">HAPPY</option>
+    <option value="FACE/2.PNG">ANGRY Face</option>
+    <option value="FACE/IMG_1683.PNG">Laughing Face</option>
+    <option value="FACE/IMG_1684.PNG">Surprised Face</option>
+  </select>
+  <select id="skinSelect" onchange="selectTrait('skin', this.value)">
+    <option value="">HEAD</option>
+    <option value="SKIN/A.PNG">NO HEAD</option>
+    <option value="SKIN/1.PNG">Fair Skin</option>
+    <option value="SKIN/2.PNG">Medium Skin</option>
+    <option value="SKIN/3.PNG">Dark Skin</option>
+    <option value="SKIN/4.PNG">Tanned Skin</option>
+  </select>
+  <select id="clothingSelect" onchange="selectTrait('clothing', this.value)">
+    <option value="">CLOTHING</option>
+    <option value="CLOTHING/A.PNG">NUDIE RUDIE</option>
+    <option value="CLOTHING/27.PNG">RAINBOW HOODIE</option>
+    <option value="CLOTHING/10.PNG">RED HOODIE</option>
+    <option value="CLOTHING/8.PNG">WHITE HOODIE</option>
+    <option value="CLOTHING/9.PNG">GREY HOODIE</option>
+    <option value="CLOTHING/11.PNG">BLACK HOODIE</option>
+    <option value="CLOTHING/12.PNG">GREEN HOODIE</option>
+    <option value="CLOTHING/13.PNG">BLUE HOODIE</option>
+    <option value="CLOTHING/14.PNG">YELLOW HOODIE</option>
+    <option value="CLOTHING/IMG_1339.PNG">ORANGE FARMER</option>
+    <option value="CLOTHING/IMG_1341.PNG">TEAL FARMER</option>
+  </select>
+  <select id="backgroundSelect" onchange="selectTrait('background', this.value)">
+    <option value="">BACKGROUND</option>
+    <option value="BACKGROUNDS/IMG_1529.PNG">PEACH</option>
+    <option value="BACKGROUNDS/IMG_1530.PNG">RED</option>
+    <option value="BACKGROUNDS/IMG_1531.PNG">GREEN</option>
+    <option value="BACKGROUNDS/IMG_1532.PNG">YELLOW</option>
+  </select>
+  <select id="accessoriesSelect" onchange="selectTrait('accessories', this.value)">
+    <option value="">GLASSES</option>
+    <option value="GLASSES/A.PNG">NO GLASSES</option>
+    <option value="GLASSES/1.PNG">PIT VIPERS</option>
+    <option value="GLASSES/2.PNG">SKI GOGGLES</option>
+    <option value="GLASSES/3.PNG">3D GLASSES</option>
+    <option value="GLASSES/4.PNG">INCOGNITO</option>
+    <option value="GLASSES/5.PNG">SPACE GLASSES</option>
+    <option value="GLASSES/6.PNG">SUNNIES</option>
+    <option value="GLASSES/7.PNG">JOHN LENNONS</option>
+  </select>
+  <!-- Added new select for Hats -->
+  <select id="hatSelect" onchange="selectTrait('hat', this.value)">
+    <option value="">HEADWEAR</option>
+    <option value="HATS/A.PNG">NO HAT</option>
+    <option value="HATS/16.PNG">BLONDE SIDE HAT</option>
+    <option value="HATS/20.PNG">BLACK BACKWARDS CAP</option>
+    <option value="HATS/3.PNG">Fedora</option>
+    <option value="HATS/7.PNG">Party Hat</option>
+    <option value="HATS/A.PNG">NO HAT</option>
+    <option value="HATS/1.PNG">Baseball Cap</option>
+    <option value="HATS/2.PNG">Beanie</option>
+    <option value="HATS/3.PNG">Fedora</option>
+    <option value="HATS/7.PNG">Party Hat</option>
+  </select>
+  <!-- Added new select for Hand Gestures -->
+  <select id="handSelect" onchange="selectTrait('hand', this.value)">
+    <option value="">HAND GESTURES</option>
+    <option value="HANDS/1.PNG">GAMING CONTROLLER</option>
+    <option value="HANDS/2.PNG">SNOWBALL</option>
+
+  </select>
+</div>
+
+<div id="characterDisplay">
+  <img id="background" src="" alt="Background">
+  <img id="clothing" src="" alt="Clothing">
+  <img id="skin" src="" alt="Skin Color">
+  <img id="face" src="" alt="Face">
+  <img id="hair" src="" alt="Hair/Headwear">
+  <img id="hat" src="" alt="Hat">
+  <img id="accessories" src="" alt="Accessories">
+  <img id="hand" src="" alt="Hand Gesture">
+</div>
+
+<script>
+function selectTrait(category, filename) {
+  if (filename) {
+    document.getElementById(category).src = filename;
+  }
+}
+</script>
+
+</body>
+</html>
