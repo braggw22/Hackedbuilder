@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Character Creator</title>
+<style>
+    body { font-family: Arial, sans-serif; }
+    .tab { overflow: hidden; background-color: #f1f1f1; }
+    .tab button { background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s; }
+    .tab button:hover { background-color: #ddd; }
+    .tabcontent { display: none; padding: 6px 12px; border: 1px solid #ccc; border-top: none; }
+    .trait-image { width: 100px; height: 100px; margin: 10px; cursor: pointer; }
+    .trait-image:hover { border: 2px solid #555; }
+</style>
+</head>
+<body>
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Hair')">Hair/Headwear</button>
+  <button class="tablinks" onclick="openTab(event, 'Face')">Face</button>
+  <button class="tablinks" onclick="openTab(event, 'Skin')">Skin Color</button>
+  <button class="tablinks" onclick="openTab(event, 'Clothing')">Clothing</button>
+  <button class="tablinks" onclick="openTab(event, 'Background')">Background</button>
+  <button class="tablinks" onclick="openTab(event, 'Accessories')">Accessories</button>
+</div>
+
+<div id="Hair" class="tabcontent">
+<img src="IMAGES/IMG_1359.PNG" alt="Short Hair" class="trait-image" onclick="selectTrait('Hair', 'Short Hair')">
+  <p>Short Hair</p>
+</div>
+
+
+<div id="Face" class="tabcontent">
+<img src="FACE/IMG_1681.PNG" alt="Smiling Face" class="trait-image" onclick="selectTrait('Face', 'Smiling Face')">
+  <p>Smiling Face</p>
+</div>
+
+<div id="Skin" class="tabcontent">
+<img src="SKIN/IMG_1344.PNG" alt="Smiling Face" class="trait-image" onclick="selectTrait('Face', 'Smiling Face')">
+  <p>Fair Skin</p>
+
+</div>
+
+<div id="Clothing" class="tabcontent">
+ <img src="IMAGES/IMG_1339.PNG" alt="Casual Shirt" class="trait-image" onclick="selectTrait('Clothing', 'Casual Shirt')">
+  <p>Casual Shirt</p>
+</div>
+
+<div id="Background" class="tabcontent">
+<img src="BACKGROUNDS/IMG_1529.PNG" alt="Park" class="trait-image" onclick="selectTrait('Background', 'Park')">
+  <p>Park</p>
+</div>
+
+<div id=“Sunglasses" class="tabcontent">
+<img src="GLASSES/IMG_1334.PNG" alt="Sunglasses" class="trait-image" onclick="selectTrait('Accessories', 'Sunglasses')">
+  <p>Sunglasses</p>
+</div>
+
+<script>
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Default to open the first tab
+document.getElementsByClassName("tablinks")[0].click();
+</script>
+
+</body>
+</html>
