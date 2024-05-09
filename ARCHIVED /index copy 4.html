@@ -5,9 +5,9 @@
 <title>Character Creator</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    body {
-        font-family: 'Baloo 2', cursive;
-        background-color: #f4f4f9;
+    body { 
+        font-family: 'Baloo 2', cursive; /* Child-like, playful font */
+        background-color: #f4f4f9; 
         color: #333;
         margin: 0;
         padding: 0;
@@ -17,70 +17,45 @@
     }
     #headerImage {
         margin-top: 5px;
-        width: auto;
-        height: 300px;
+        width: auto; /* Adjust the width as necessary */
+        height: 300px; /* Adjust the height as necessary */
     }
-#traitSelection {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 5px;
-    padding: 20px;
-    background: linear-gradient(to right, #89f7fe, #66a6ff); /* Light blue to deeper blue gradient */
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    #traitSelection { 
+        display: flex; 
+        justify-content: center; 
+        flex-wrap: wrap;
+        margin-bottom: 5px; 
+        padding: 20px;
+        background-color: #e2e2e5;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    select {
+    select { 
         margin: 10px;
-        padding: 15px;
-        border-radius: 20px;
-        border: none;
+        padding: 15px; /* Increased padding for a more robust look */
+        border-radius: 20px; /* More pronounced rounded corners */
+        border: none; /* Removing the default border */
+        background-color: #FFD700; /* Bright color suitable for children */
         font-size: 16px;
         cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Soft shadow for depth */
     }
-    #backgroundSelect { background-color: #ff8c00; } /* Dark orange */
-    #backgroundSelect:hover { background-color: #ffa500; }
-    #hairSelect { background-color: #8a2be2; } /* Blue violet */
-    #hairSelect:hover { background-color: #9370db; }
-    #faceSelect { background-color: #3cb371; } /* Medium sea green */
-    #faceSelect:hover { background-color: #66cdaa; }
-    #skinSelect { background-color: #00bfff; } /* Deep sky blue */
-    #skinSelect:hover { background-color: #87ceeb; }
-    #clothingSelect { background-color: #dc143c; } /* Crimson */
-    #clothingSelect:hover { background-color: #ff6347; }
-    #accessoriesSelect { background-color: #ffa07a; } /* Light salmon */
-    #accessoriesSelect:hover { background-color: #ffa500; }
-    #hatSelect { background-color: #6a5acd; } /* Slate blue */
-    #hatSelect:hover { background-color: #7b68ee; }
-    #handSelect { background-color: #ff4500; } /* Orange red */
-    #handSelect:hover { background-color: #ff6347; }
-    #characterDisplay {
-        position: relative;
-        width: 600px;
-        height: 600px;
-        border: 3px solid #666;
-        margin-top: 20px;
+    select:hover {
+        background-color: #F0E68C; /* Slightly lighter color on hover */
+    }
+    #characterDisplay { 
+        position: relative; 
+        width: 600px; 
+        height: 600px; 
+        border: 3px solid #666; 
+        margin-top: 20px; 
         background-color: #fff;
         box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
-    #characterDisplay img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-    button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 18px;
-        border-radius: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #45a049;
+    #characterDisplay img { 
+        position: absolute; 
+        width: 100%; 
+        height: 100%; 
     }
 </style>
 </head>
@@ -110,27 +85,6 @@ function selectTrait(category, filename) {
     <option value="BACKGROUNDS/IMG_1531.PNG">GREEN</option>
     <option value="BACKGROUNDS/IMG_1532.PNG">YELLOW</option>
   </select>
- <select id="skinSelect" onchange="selectTrait('skin', this.value)">
-    <option value="">HEAD</option>
-    <option value="SKIN/A.PNG">NO SKIN</option>
-    <option value="SKIN/1.PNG">SKIN 1</option>
-    <option value="SKIN/2.PNG">SKIN 2</option>
-    <option value="SKIN/3.PNG">SKIN 3</option>
-    <option value="SKIN/4.PNG">SKIN 4</option>
-  </select>
-  <select id="faceSelect" onchange="selectTrait('face', this.value)">
-    <option value="">FACE</option>
-    <option value="FACE/A.PNG">NO FACE</option>
-    <option value="FACE/1.PNG">HAPPY 1</option>
-    <option value="FACE/1A.PNG">HAPPY 2</option>
-    <option value="FACE/2.PNG">UNSURE</option>
-    <option value="FACE/3.PNG">DETERMINED</option>
-    <option value="FACE/4.PNG">ANGRY 1</option>
-    <option value="FACE/5.PNG">ANGRY 2</option>
-    <option value="FACE/6.PNG">NOT IMPRESSED</option>
-  </select>
-
-
 
   <select id="hairSelect" onchange="selectTrait('hair', this.value)">
     <option value="">HAIRSTYLE</option>
@@ -179,20 +133,41 @@ function selectTrait(category, filename) {
     <option value="HAIR/20.PNG">BLACK SIDE</option>
     <option value="HAIR/24.PNG">BLACK PART</option>
     <option value="HAIR/28.PNG">BLACK EMO</option>
-</select>
 
  
- 
 
- <select id="clothingSelect" onchange="selectTrait('clothing', this.value)">
+
+
+
+  </select>
+  <select id="faceSelect" onchange="selectTrait('face', this.value)">
+    <option value="">FACE</option>
+    <option value="FACE/A.PNG">NO FACE</option>
+    <option value="FACE/1.PNG">HAPPY 1</option>
+    <option value="FACE/1A.PNG">HAPPY 2</option>
+    <option value="FACE/2.PNG">UNSURE</option>
+    <option value="FACE/3.PNG">DETERMINED</option>
+    <option value="FACE/4.PNG">ANGRY 1</option>
+    <option value="FACE/5.PNG">ANGRY 2</option>
+    <option value="FACE/6.PNG">NOT IMPRESSED</option>
+  </select>
+  <select id="skinSelect" onchange="selectTrait('skin', this.value)">
+    <option value="">HEAD</option>
+    <option value="SKIN/A.PNG">NO SKIN</option>
+    <option value="SKIN/1.PNG">SKIN 1</option>
+    <option value="SKIN/2.PNG">SKIN 2</option>
+    <option value="SKIN/3.PNG">SKIN 3</option>
+    <option value="SKIN/4.PNG">SKIN 4</option>
+  </select>
+  <select id="clothingSelect" onchange="selectTrait('clothing', this.value)">
     <option value="">CLOTHING</option>
     <option value="CLOTHING/A.PNG">NO CLOTHING</option>
     <option value="CLOTHING/1.PNG">WHITE HOODIE</option>
     <option value="CLOTHING/1A.PNG">WHITE HOODIE UP</option>
     <option value="CLOTHING/2.PNG">BLACK HOODIE</option>
     <option value="CLOTHING/2A.PNG">BLACK HOODIE UP</option>
-    <option value="CLOTHING/6.PNG">GREY HOODIE</option>
-    <option value="CLOTHING/6A.PNG">GREY HOODIE UP</option>
+    <option value="CLOTHING/6.PNG">BLACK HOODIE</option>
+    <option value="CLOTHING/6A.PNG">GREEN HOODIE</option>
     <option value="CLOTHING/4.PNG">MAROON HOODIE</option>
     <option value="CLOTHING/4A.PNG">MAROON HOODIE UP</option>
     <option value="CLOTHING/5.PNG">CHARCOAL HOODIE</option>
@@ -217,7 +192,6 @@ function selectTrait(category, filename) {
     <option value="CLOTHING/19.PNG">BLUE VARSITY</option>
     <option value="CLOTHING/20.PNG">UNCLE SAM SUIT</option>
   </select>
-
  
   <select id="accessoriesSelect" onchange="selectTrait('accessories', this.value)">
     <option value="">GLASSES</option>
@@ -260,6 +234,7 @@ function selectTrait(category, filename) {
     <option value="HATS/35.PNG">PIRATE HAT</option>
     <option value="HATS/34.PNG">PIRATE HAT/EYEPATCH</option>
     <option value="HATS/7.PNG">TACO HAT</option>
+    <option value="HATS/10.PNG">SAMURAI</option>
     <option value="HATS/36.PNG">FIREMAN HAT</option>
     <option value="HATS/37.PNG">WIZARD</option>
     <option value="HATS/7.PNG">Party Hat</option>
@@ -268,14 +243,6 @@ function selectTrait(category, filename) {
   <select id="handSelect" onchange="selectTrait('hand', this.value)">
     <option value="">HAND GESTURES</option>
     <option value="HANDS/AA.PNG">NO HAND GESTURE</option>
-    <option value="HANDS/12.PNG">SKIN 1 SHAKA</option>
-    <option value="HANDS/13.PNG">SKIN 2 SHAKA</option>
-    <option value="HANDS/14.PNG">SKIN 3 SHAKA</option>
-    <option value="HANDS/15.PNG">SKIN 4 SHAKA</option>
-    <option value="HANDS/8.PNG">SKIN 1 DOUBLE SHAKA</option>
-    <option value="HANDS/9.PNG">SKIN 2 DOUBLE SHAKA</option>
-    <option value="HANDS/10.PNG">SKIN 3 DOUBLE SHAKA</option>
-    <option value="HANDS/11.PNG">SKIN 4 DOUBLE SHAKA</option>
     <option value="HANDS/1.PNG">GAMING CONTROLLER</option>
     <option value="HANDS/2.PNG">SNOWBALL</option>
     <option value="HANDS/3.PNG">BASEBALL</option>
@@ -295,38 +262,24 @@ function selectTrait(category, filename) {
 </div>
 
 <div id="characterDisplay">
-  <img id="background" src="" alt="">
-  <img id="skin" src="" alt="">
-  <img id="face" src="" alt="">
-  <img id="hair" src="" alt="">
-  <img id="hat" src="" alt="">
-  <img id="clothing" src="" alt="">
-  <img id="accessories" src="" alt="">
-  <img id="hand" src="" alt="">
-  <img id="ball" src="" alt="">
-
-
+  <img id="background" src="" alt="Background">
+  <img id="skin" src="" alt="Skin Color">
+  <img id="face" src="" alt="Face">
+  <img id="hair" src="" alt="Hair/Headwear">
+  <img id="hat" src="" alt="Hat">
+  <img id="clothing" src="" alt="Clothing">
+  <img id="accessories" src="" alt="Accessories">
+  <img id="hand" src="" alt="Hand Gesture">
+  <img id="ball" src="" alt="Balls">
 </div>
 
+<script>
+function selectTrait(category, filename) {
+  if (filename) {
+    document.getElementById(category).src = filename;
+  }
+}
+</script>
 
-
-    <!-- JavaScript and html2canvas setup -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script>
-        function selectTrait(category, filename) {
-            if (filename) {
-                document.getElementById(category).src = filename;
-            }
-        }
-
-        function saveCharacterImage() {
-            html2canvas(document.getElementById("characterDisplay"), {scale: 1}).then(canvas => {
-                let link = document.createElement('a');
-                link.download = 'my-character.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            }).catch(error => console.error('Error capturing canvas:', error));
-        }
-    </script>
 </body>
 </html>
