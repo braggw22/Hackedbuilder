@@ -7,354 +7,384 @@
 <style>
 body {
     font-family: 'Baloo 2', cursive;
-    background-image: linear-gradient(to right, #89f7fe, #66a6ff); /* Light blue to deeper blue gradient */
+    background-image: linear-gradient(to right, #89f7fe, #66a6ff);
     color: #333;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    }
-    #headerImage {
-        margin-top: 5px;
-        width: auto;
-        height: 300px;
-    }
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+#headerImage {
+    margin-top: 5px;
+    width: auto;
+    height: 300px;
+}
 #traitSelection {
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 5px;
+    margin-top: 20px;
     padding: 20px;
-    background: linear-gradient(to right, #89f7fe, #66a6ff); /* Light blue to deeper blue gradient */
+    background: linear-gradient(to right, #89f7fe, #66a6ff);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-  select {
-        margin: 10px;
-        padding: 15px;
-        border-radius: 20px;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        font-weight: bold; /* Makes dropdown text bold */
-text-align: center; /* Centers the text within the dropdown */
-    }
-    #backgroundSelect { background-color: #ff8c00; } /* Dark orange */
-    #backgroundSelect:hover { background-color: #ffa500; }
-    #hairSelect { background-color: #8a2be2; } /* Blue violet */
-    #hairSelect:hover { background-color: #9370db; }
-    #faceSelect { background-color: #3cb371; } /* Medium sea green */
-    #faceSelect:hover { background-color: #66cdaa; }
-    #skinSelect { background-color: #00bfff; } /* Deep sky blue */
-    #skinSelect:hover { background-color: #87ceeb; }
-    #clothingSelect { background-color: #dc143c; } /* Crimson */
-    #clothingSelect:hover { background-color: #ff6347; }
-    #accessoriesSelect { background-color: #ffa07a; } /* Light salmon */
-    #accessoriesSelect:hover { background-color: #ffa500; }
-    #hatSelect { background-color: #6a5acd; } /* Slate blue */
-    #hatSelect:hover { background-color: #7b68ee; }
-    #handSelect { background-color: #ff4500; } /* Orange red */
-    #handSelect:hover { background-color: #ff6347; }
-    #characterDisplay {
-        position: relative;
-        width: 600px;
-        height: 600px;
-        border: 3px solid #666;
-        margin-top: 20px;
-        background-color: #fff;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    }
-    #characterDisplay img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-    button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 18px;
-        border-radius: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #45a049;
-    }
+    width: 100%; /* Ensure buttons span full width */
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+}
+.category-button {
+    flex: 1 1 auto; /* Allow buttons to flex */
+    margin: 5px; /* Add margin around buttons */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.category-button:hover {
+    background-color: #e67e22;
+}
+#mainContent {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
+}
+#characterDisplay {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    border: 3px solid #666;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    margin-left: 20px; /* Space between character display and sidebar */
+}
+#characterDisplay img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    border-left: 3px solid #666;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative; /* Make sidebar relative to main content */
+    margin-left: 20px; /* Space between character display and sidebar */
+    min-height: calc(100vh - 400px); /* Ensure the sidebar extends down further */
+}
+.trait-category {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+.trait-category.active {
+    display: flex;
+}
+.trait-options {
+    display: grid;
+    grid-template-columns: repeat(4, auto); /* Set to 4 columns */
+    justify-items: center;
+    margin: 10px 0;
+}
+.trait-options img {
+    margin: 5px;
+    width: 120px; /* Increased size */
+    height: 120px; /* Increased size */
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+.trait-options img:hover {
+    border: 2px solid #666;
+}
+button {
+    margin: 10px;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #e67e22;
+}
 </style>
 </head>
 <body>
 <!-- Image used as a header -->
 <img id="headerImage" src="HEADER/1.PNG" alt="CREATE YOUR OWN LITTLE OLLIE">
 
-
-
-<script>
-function selectTrait(category, filename) {
-  if (filename) {
-    document.getElementById(category).src = filename;
-  }
-}
-</script>
-
-</body>
-</html>
-
 <div id="traitSelection">
- <select id="backgroundSelect" onchange="selectTrait('background', this.value)">
-    <option value="">BACKGROUND</option>
-    <option value="BACKGROUNDS/1.PNG">NO BACKGROUND</option>
-    <option value="BACKGROUNDS/IMG_1529.PNG">PEACH</option>
-    <option value="BACKGROUNDS/IMG_1530.PNG">RED</option>
-    <option value="BACKGROUNDS/IMG_1531.PNG">GREEN</option>
-    <option value="BACKGROUNDS/IMG_1532.PNG">YELLOW</option>
-    <option value="BACKGROUNDS/1.PNG">BLACK</option>
-    <option value="BACKGROUNDS/2.PNG">BROWNISH</option>
-    <option value="BACKGROUNDS/3.PNG">WHITE</option>
-    <option value="BACKGROUNDS/4.PNG">MINTISH</option>
-    <option value="BACKGROUNDS/13.PNG">BRIGHT GREEN</option>
-    <option value="BACKGROUNDS/5.PNG">PURPLE</option>
-    <option value="BACKGROUNDS/6.PNG">BROWNY/GREENY</option>
-    <option value="BACKGROUNDS/7.PNG">BLUE</option>
-    <option value="BACKGROUNDS/8.PNG">GREY</option>
-    <option value="BACKGROUNDS/9.PNG">PINK</option>
-    <option value="BACKGROUNDS/10.PNG">FUNKY1</option>
-    <option value="BACKGROUNDS/11.PNG">FUNKY2</option>
-    <option value="BACKGROUNDS/12.PNG">FUNKY3</option>
-    <option value="BACKGROUNDS/14.PNG">NIGHT SKY</option>
-    <option value="BACKGROUNDS/15.PNG">CHECKERS</option>
-    <option value="BACKGROUNDS/16.PNG">COTTON CANDY</option>
-    <option value="BACKGROUNDS/17.PNG">BEAUTIFUL DAY</option>
-    <option value="BACKGROUNDS/18.PNG">MARSHMALLOW</option>
-    <option value="BACKGROUNDS/19.PNG">ANONYMOUS</option>
-    <option value="BACKGROUNDS/20.PNG">DEVILISH</option>
-
-  </select>
- <select id="skinSelect" onchange="selectTrait('skin', this.value)">
-    <option value="">HEAD</option>
-    <option value="SKIN/A.PNG">NO SKIN</option>
-    <option value="SKIN/1.PNG">SKIN 1</option>
-    <option value="SKIN/2.PNG">SKIN 2</option>
-    <option value="SKIN/3.PNG">SKIN 3</option>
-    <option value="SKIN/4.PNG">SKIN 4</option>
-  </select>
-  <select id="faceSelect" onchange="selectTrait('face', this.value)">
-    <option value="">FACE</option>
-    <option value="FACE/A.PNG">NO FACE</option>
-    <option value="FACE/1.PNG">HAPPY 1</option>
-    <option value="FACE/1A.PNG">HAPPY 2</option>
-    <option value="FACE/2.PNG">UNSURE</option>
-    <option value="FACE/3.PNG">DETERMINED</option>
-    <option value="FACE/4.PNG">ANGRY 1</option>
-    <option value="FACE/5.PNG">ANGRY 2</option>
-    <option value="FACE/6.PNG">NOT IMPRESSED</option>
-  </select>
-
-
-
-  <select id="hairSelect" onchange="selectTrait('hair', this.value)">
-    <option value="">HAIRSTYLE</option>
-    <option value="HAIR/A.PNG">NO HAIR</option>
-    <option value="HAIR/29.PNG">WHITE 1</option>
-    <option value="HAIR/33.PNG">WHITE 2</option>
-    <option value="HAIR/37.PNG">WHITE 3</option>
-    <option value="HAIR/41.PNG">WHITE 4</option>   
-    <option value="HAIR/45.PNG">WHITE 5</option>
-    <option value="HAIR/49.PNG">WHITE 6</option>  
-    <option value="HAIR/30.PNG">BLONDE 1</option>  
-    <option value="HAIR/34.PNG">BLONDE 2</option>
-    <option value="HAIR/38.PNG">BLONDE 3</option>
-    <option value="HAIR/42.PNG">BLONDE 4</option>
-    <option value="HAIR/46.PNG">BLONDE 5</option>
-    <option value="HAIR/50.PNG">BLONDE 6</option>
-    <option value="HAIR/31.PNG">BROWN 1</option>
-    <option value="HAIR/35.PNG">BROWN 2</option>
-    <option value="HAIR/39.PNG">BROWN 3</option>
-    <option value="HAIR/43.PNG">BROWN 4</option>
-    <option value="HAIR/47.PNG">BROWN 5</option>
-    <option value="HAIR/51.PNG">BROWN 6</option>
-    <option value="HAIR/32.PNG">BLACK 1</option>
-    <option value="HAIR/36.PNG">BLACK 2</option>
-    <option value="HAIR/40.PNG">BLACK 3</option>
-    <option value="HAIR/44.PNG">BLACK 4</option>
-    <option value="HAIR/48.PNG">BLACK 5</option>
-    <option value="HAIR/52.PNG">BLACK 6</option>
-
-</select>
-
- 
- 
-
- <select id="clothingSelect" onchange="selectTrait('clothing', this.value)">
-    <option value="">CLOTHING</option>
-    <option value="CLOTHING/A.PNG">NO CLOTHING</option>
-    <option value="CLOTHING/1.PNG">WHITE HOODIE</option>
-    <option value="CLOTHING/1A.PNG">WHITE HOODIE UP</option>
-    <option value="CLOTHING/2.PNG">BLACK HOODIE</option>
-    <option value="CLOTHING/2A.PNG">BLACK HOODIE UP</option>
-    <option value="CLOTHING/6.PNG">GREY HOODIE</option>
-    <option value="CLOTHING/6A.PNG">GREY HOODIE UP</option>
-    <option value="CLOTHING/4.PNG">MAROON HOODIE</option>
-    <option value="CLOTHING/4A.PNG">MAROON HOODIE UP</option>
-    <option value="CLOTHING/5.PNG">CHARCOAL HOODIE</option>
-    <option value="CLOTHING/5A.PNG">CHARCOAL HOODIE UP</option>
-    <option value="CLOTHING/3.PNG">BLUE HOODIE</option>
-    <option value="CLOTHING/3A.PNG">BLUE HOODIE UP</option>
-    <option value="CLOTHING/7.PNG">GREEN HOODIE</option>
-    <option value="CLOTHING/7A.PNG">GREEN HOODIE UP</option>
-    <option value="CLOTHING/8.PNG">YELLOW HOODIE</option>
-    <option value="CLOTHING/8A.PNG">YELLOW HOODIE UP</option>
-    <option value="CLOTHING/9.PNG">ORANGE HOODIE</option>
-    <option value="CLOTHING/9A.PNG">ORANGE HOODIE UP</option>
-    <option value="CLOTHING/10.PNG">RED HOODIE</option>
-    <option value="CLOTHING/10A.PNG">RED HOODIE UP</option>
-    <option value="CLOTHING/11.PNG">JPGPAPII HOODIE</option>
-    <option value="CLOTHING/12.PNG">OLLIE SPECIAL HOODIE</option>
-    <option value="CLOTHING/13.PNG">GIRAFFE HOODIE</option>
-    <option value="CLOTHING/14.PNG">TIE-DYE HOODIE</option>
-    <option value="CLOTHING/16.PNG">KNIGHT SUIT</option>
-    <option value="CLOTHING/17.PNG">PIRATE SUIT</option>
-    <option value="CLOTHING/18.PNG">RED VARSITY</option>
-    <option value="CLOTHING/19.PNG">BLUE VARSITY</option>
-    <option value="CLOTHING/21.PNG">COWBOY</option>
-    <option value="CLOTHING/20.PNG">UNCLE SAM SUIT</option>
-    <option value="CLOTHING/22.PNG">CAPTAIN JACKET</option>
-  </select>
-
- 
-  <select id="accessoriesSelect" onchange="selectTrait('accessories', this.value)">
-    <option value="">GLASSES</option>
-    <option value="GLASSES/A.PNG">NO GLASSES</option>
-    <option value="GLASSES/1.PNG">PIT VIPERS</option>
-    <option value="GLASSES/2.PNG">SKI GOGGLES</option>
-    <option value="GLASSES/3.PNG">3D GLASSES</option>
-    <option value="GLASSES/4.PNG">INCOGNITO</option>
-    <option value="GLASSES/5.PNG">SPACE GLASSES</option>
-    <option value="GLASSES/6.PNG">SUNNIES</option>
-    <option value="GLASSES/7.PNG">JOHN LENNONS</option>
-  </select>
-  <!-- Added new select for Hats -->
-  <select id="hatSelect" onchange="selectTrait('hat', this.value)">
-    <option value="">HEADWEAR</option>
-    <option value="HATS/A.PNG">NO HAT</option>
-    <option value="HATS/1.PNG">BLUE BEANIE</option>
-    <option value="HATS/2.PNG">BLACK BEANIE</option>
-    <option value="HATS/4.PNG">WHITE BEANIE</option>
-    <option value="HATS/3.PNG">GREEN BEANIE</option>
-    <option value="HATS/33.PNG">JPGPAPII HAT</option>
-    <option value="HATS/15.PNG">WHITE SIDEWAYS HAT</option>
-    <option value="HATS/16.PNG">BLONDE SIDEWAYS HAT</option>
-    <option value="HATS/17.PNG">BROWN SIDEWAYS HAT</option>
-    <option value="HATS/18.PNG">BLACK SIDEWAYS HAT</option>
-    <option value="HATS/19.PNG">WHITE HAIR RED BACKWARDS HAT</option>
-    <option value="HATS/20.PNG">WHITE HAIR BLACK BACKWARDS HAT</option>
-    <option value="HATS/21.PNG">WHITE HAIR BLUE BACKWARDS HAT</option>
-    <option value="HATS/39.PNG">WHITE HAIR COWBOY</option>
-    <option value="HATS/22.PNG">BLONDE HAIR RED BACKWARDS HAT</option>
-    <option value="HATS/23.PNG">BLONDE HAIR BLACK BACKWARDS HAT</option>
-    <option value="HATS/24.PNG">BLONDE HAIR BLUE BACKWARDS HAT</option>
-    <option value="HATS/38.PNG">BLONDE HAIR COWBOY</option>
-    <option value="HATS/25.PNG">BROWN HAIR RED BACKWARDS HAT</option>
-    <option value="HATS/26.PNG">BROWN HAIR BLACK BACKWARDS HAT</option>
-    <option value="HATS/27.PNG">BROWN HAIR BLUE BACKWARDS HAT</option>
-    <option value="HATS/40.PNG">BROWN HAIR COWBOY</option>
-    <option value="HATS/28.PNG">BLACK HAIR RED BACKWARDS HAT</option>
-    <option value="HATS/29.PNG">BLACK HAIR BLACK BACKWARDS HAT</option>
-    <option value="HATS/30.PNG">BLACK HAIR BLUE BACKWARDS HAT</option>
-    <option value="HATS/41.PNG">BLACK HAIR COWBOY</option>
-    <option value="HATS/31.PNG">KNIGHT HELMET 1</option>
-    <option value="HATS/32.PNG">KNIGHT HELMET 2</option>
-    <option value="HATS/35.PNG">PIRATE HAT</option>
-    <option value="HATS/34.PNG">PIRATE HAT/EYEPATCH</option>
-    <option value="HATS/7.PNG">TACO HAT</option>
-    <option value="HATS/36.PNG">FIREMAN HAT</option>
-    <option value="HATS/37.PNG">WIZARD</option>
-    <option value="HATS/42.PNG">HALO</option>
-    <option value="HATS/43.PNG">CAPTAIN HAT</option>
-  </select>
-  <!-- Added new select for Hand Gestures -->
-  <select id="handSelect" onchange="selectTrait('hand', this.value)">
-    <option value="">HAND GESTURES</option>
-    <option value="HANDS/AA.PNG">NO HAND GESTURE</option>
-    <option value="HANDS/12.PNG">SKIN 1 SHAKA</option>
-    <option value="HANDS/13.PNG">SKIN 2 SHAKA</option>
-    <option value="HANDS/14.PNG">SKIN 3 SHAKA</option>
-    <option value="HANDS/15.PNG">SKIN 4 SHAKA</option>
-    <option value="HANDS/8.PNG">SKIN 1 DOUBLE SHAKA</option>
-    <option value="HANDS/9.PNG">SKIN 2 DOUBLE SHAKA</option>
-    <option value="HANDS/10.PNG">SKIN 3 DOUBLE SHAKA</option>
-    <option value="HANDS/11.PNG">SKIN 4 DOUBLE SHAKA</option>
-    <option value="HANDS/16.PNG">SKIN 1 ROCK-ON</option>
-    <option value="HANDS/17.PNG">SKIN 2 ROCK-ON</option>
-    <option value="HANDS/18.PNG">SKIN 3 ROCK-ON</option>
-    <option value="HANDS/19.PNG">SKIN 4 ROCK-ON</option>
-    <option value="HANDS/20.PNG">SKIN 1 SPOT-ON</option>
-    <option value="HANDS/21.PNG">SKIN 2 SPOT-ON</option>
-    <option value="HANDS/22.PNG">SKIN 3 SPOT-ON</option>
-    <option value="HANDS/23.PNG">SKIN 4 SPOT-ON</option>
-    <option value="HANDS/1.PNG">SKIN 1 GAMING CONTROLLER</option>
-    <option value="HANDS/1A.PNG">SKIN 2 GAMING CONTROLLER</option>
-    <option value="HANDS/1B.PNG">SKIN 3 GAMING CONTROLLER</option>
-    <option value="HANDS/1C.PNG">SKIN 4 GAMING CONTROLLER</option>
-    <option value="HANDS/2.PNG">SKIN 1 SNOWBALL</option>
-    <option value="HANDS/2A.PNG">SKIN 2 SNOWBALL</option>
-    <option value="HANDS/2B.PNG">SKIN 3 SNOWBALL</option>
-    <option value="HANDS/2C.PNG">SKIN 4 SNOWBALL</option>
-    <option value="HANDS/3.PNG">SKIN 1 BASEBALL</option>
-    <option value="HANDS/3A.PNG">SKIN 2 BASEBALL</option>
-    <option value="HANDS/3B.PNG">SKIN 3 BASEBALL</option>
-    <option value="HANDS/3C.PNG">SKIN 4 BASEBALL</option>
-    <option value="HANDS/4.PNG">SKIN 1 FINGER (FOR BALL)</option>
-    <option value="HANDS/5.PNG">SKIN 2 FINGER (FOR BALL)</option>
-    <option value="HANDS/6.PNG">SKIN 3 FINGER (FOR BALL)</option>
-    <option value="HANDS/7.PNG">SKIN 4 FINGER (FOR BALL)</option>
-</select>
-  <!-- Added new select for Balls -->
-  <select id="handSelect" onchange="selectTrait('ball', this.value)">
-    <option value="">BALLS</option>
-    <option value="HAND-BALLS/A.PNG">NO BALL</option>
-    <option value="HAND-BALLS/1.PNG">SOCCER BALL</option>
-    <option value="HAND-BALLS/2.PNG">BASKETBALL</option>
-
-  </select>
+  <button class="category-button" onclick="showCategory('skinCategory')">Skin</button>
+  <button class="category-button" onclick="showCategory('faceCategory')">Face</button>
+  <button class="category-button" onclick="showCategory('hairCategory')">Hair</button>
+  <button class="category-button" onclick="showCategory('clothingCategory')">Clothing</button>
+  <button class="category-button" onclick="showCategory('accessoriesCategory')">Sunglasses</button>
+  <button class="category-button" onclick="showCategory('hatCategory')">Hats</button>
+  <button class="category-button" onclick="showCategory('handCategory')">Hand Gestures</button>
+  <button class="category-button" onclick="showCategory('ballCategory')">Balls</button>
+  <button class="category-button" onclick="showCategory('backgroundCategory')">Backgrounds</button>
 </div>
 
-<div id="characterDisplay">
-  <img id="background" src="" alt="">
-  <img id="skin" src="" alt="">
-  <img id="face" src="" alt="">
-  <img id="hair" src="" alt="">
-  <img id="hat" src="" alt="">
-  <img id="clothing" src="" alt="">
-  <img id="accessories" src="" alt="">
-  <img id="hand" src="" alt="">
-  <img id="ball" src="" alt="">
+<div id="mainContent">
+  <div id="characterDisplay">
+    <img id="background" src="" alt="">
+    <img id="skin" src="" alt="">
+    <img id="face" src="" alt="">
+    <img id="hair" src="" alt="">
+    <img id="hat" src="" alt="">
+    <img id="clothing" src="" alt="">
+    <img id="accessories" src="" alt="">
+    <img id="hand" src="" alt="">
+    <img id="ball" src="" alt="">
+  </div>
 
-
+  <div id="sidebar">
+    <div class="trait-category" id="skinCategory">
+      <div class="trait-options">
+        <img src="SKIN/A.PNG" alt="No Skin" onclick="selectTrait('skin', 'SKIN/A.PNG')">
+        <img src="SKIN/1.PNG" alt="Skin 1" onclick="selectTrait('skin', 'SKIN/1.PNG')">
+        <img src="SKIN/2.PNG" alt="Skin 2" onclick="selectTrait('skin', 'SKIN/2.PNG')">
+        <img src="SKIN/3.PNG" alt="Skin 3" onclick="selectTrait('skin', 'SKIN/3.PNG')">
+        <img src="SKIN/4.PNG" alt="Skin 4" onclick="selectTrait('skin', 'SKIN/4.PNG')">
+      </div>
+    </div>
+    <div class="trait-category" id="faceCategory">
+      <div class="trait-options">
+        <img src="FACE/A.PNG" alt="No Face" onclick="selectTrait('face', 'FACE/A.PNG')">
+        <img src="FACE/1.PNG" alt="Happy 1" onclick="selectTrait('face', 'FACE/1.PNG')">
+        <img src="FACE/1A.PNG" alt="Happy 2" onclick="selectTrait('face', 'FACE/1A.PNG')">
+        <img src="FACE/2.PNG" alt="Unsure" onclick="selectTrait('face', 'FACE/2.PNG')">
+        <img src="FACE/3.PNG" alt="Determined" onclick="selectTrait('face', 'FACE/3.PNG')">
+        <img src="FACE/4.PNG" alt="Angry 1" onclick="selectTrait('face', 'FACE/4.PNG')">
+        <img src="FACE/5.PNG" alt="Angry 2" onclick="selectTrait('face', 'FACE/5.PNG')">
+        <img src="FACE/6.PNG" alt="Not Impressed" onclick="selectTrait('face', 'FACE/6.PNG')">
+      </div>
+    </div>
+    <div class="trait-category" id="hairCategory">
+      <div class="trait-options">
+        <img src="HAIR/A.PNG" alt="No Hair" onclick="selectTrait('hair', 'HAIR/A.PNG')">
+        <img src="HAIR/29.PNG" alt="White 1" onclick="selectTrait('hair', 'HAIR/29.PNG')">
+        <img src="HAIR/33.PNG" alt="White 2" onclick="selectTrait('hair', 'HAIR/33.PNG')">
+        <img src="HAIR/37.PNG" alt="White 3" onclick="selectTrait('hair', 'HAIR/37.PNG')">
+        <img src="HAIR/41.PNG" alt="White 4" onclick="selectTrait('hair', 'HAIR/41.PNG')">
+        <img src="HAIR/45.PNG" alt="White 5" onclick="selectTrait('hair', 'HAIR/45.PNG')">
+        <img src="HAIR/49.PNG" alt="White 6" onclick="selectTrait('hair', 'HAIR/49.PNG')">
+        <img src="HAIR/30.PNG" alt="Blonde 1" onclick="selectTrait('hair', 'HAIR/30.PNG')">
+        <img src="HAIR/34.PNG" alt="Blonde 2" onclick="selectTrait('hair', 'HAIR/34.PNG')">
+        <img src="HAIR/38.PNG" alt="Blonde 3" onclick="selectTrait('hair', 'HAIR/38.PNG')">
+        <img src="HAIR/42.PNG" alt="Blonde 4" onclick="selectTrait('hair', 'HAIR/42.PNG')">
+        <img src="HAIR/46.PNG" alt="Blonde 5" onclick="selectTrait('hair', 'HAIR/46.PNG')">
+        <img src="HAIR/50.PNG" alt="Blonde 6" onclick="selectTrait('hair', 'HAIR/50.PNG')">
+        <img src="HAIR/31.PNG" alt="Brown 1" onclick="selectTrait('hair', 'HAIR/31.PNG')">
+        <img src="HAIR/35.PNG" alt="Brown 2" onclick="selectTrait('hair', 'HAIR/35.PNG')">
+        <img src="HAIR/39.PNG" alt="Brown 3" onclick="selectTrait('hair', 'HAIR/39.PNG')">
+        <img src="HAIR/43.PNG" alt="Brown 4" onclick="selectTrait('hair', 'HAIR/43.PNG')">
+        <img src="HAIR/47.PNG" alt="Brown 5" onclick="selectTrait('hair', 'HAIR/47.PNG')">
+        <img src="HAIR/51.PNG" alt="Brown 6" onclick="selectTrait('hair', 'HAIR/51.PNG')">
+        <img src="HAIR/32.PNG" alt="Black 1" onclick="selectTrait('hair', 'HAIR/32.PNG')">
+        <img src="HAIR/36.PNG" alt="Black 2" onclick="selectTrait('hair', 'HAIR/36.PNG')">
+        <img src="HAIR/40.PNG" alt="Black 3" onclick="selectTrait('hair', 'HAIR/40.PNG')">
+        <img src="HAIR/44.PNG" alt="Black 4" onclick="selectTrait('hair', 'HAIR/44.PNG')">
+        <img src="HAIR/48.PNG" alt="Black 5" onclick="selectTrait('hair', 'HAIR/48.PNG')">
+        <img src="HAIR/52.PNG" alt="Black 6" onclick="selectTrait('hair', 'HAIR/52.PNG')">
+      </div>
+    </div>
+    <div class="trait-category" id="clothingCategory">
+      <div class="trait-options">
+        <img src="CLOTHING/A.PNG" alt="No Clothing" onclick="selectTrait('clothing', 'CLOTHING/A.PNG')">
+        <img src="CLOTHING/1.PNG" alt="White Hoodie" onclick="selectTrait('clothing', 'CLOTHING/1.PNG')">
+        <img src="CLOTHING/1A.PNG" alt="White Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/1A.PNG')">
+        <img src="CLOTHING/2.PNG" alt="Black Hoodie" onclick="selectTrait('clothing', 'CLOTHING/2.PNG')">
+        <img src="CLOTHING/2A.PNG" alt="Black Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/2A.PNG')">
+        <img src="CLOTHING/6.PNG" alt="Grey Hoodie" onclick="selectTrait('clothing', 'CLOTHING/6.PNG')">
+        <img src="CLOTHING/6A.PNG" alt="Grey Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/6A.PNG')">
+        <img src="CLOTHING/4.PNG" alt="Maroon Hoodie" onclick="selectTrait('clothing', 'CLOTHING/4.PNG')">
+        <img src="CLOTHING/4A.PNG" alt="Maroon Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/4A.PNG')">
+        <img src="CLOTHING/5.PNG" alt="Charcoal Hoodie" onclick="selectTrait('clothing', 'CLOTHING/5.PNG')">
+        <img src="CLOTHING/5A.PNG" alt="Charcoal Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/5A.PNG')">
+        <img src="CLOTHING/3.PNG" alt="Blue Hoodie" onclick="selectTrait('clothing', 'CLOTHING/3.PNG')">
+        <img src="CLOTHING/3A.PNG" alt="Blue Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/3A.PNG')">
+        <img src="CLOTHING/7.PNG" alt="Green Hoodie" onclick="selectTrait('clothing', 'CLOTHING/7.PNG')">
+        <img src="CLOTHING/7A.PNG" alt="Green Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/7A.PNG')">
+        <img src="CLOTHING/8.PNG" alt="Yellow Hoodie" onclick="selectTrait('clothing', 'CLOTHING/8.PNG')">
+        <img src="CLOTHING/8A.PNG" alt="Yellow Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/8A.PNG')">
+        <img src="CLOTHING/9.PNG" alt="Orange Hoodie" onclick="selectTrait('clothing', 'CLOTHING/9.PNG')">
+        <img src="CLOTHING/9A.PNG" alt="Orange Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/9A.PNG')">
+        <img src="CLOTHING/10.PNG" alt="Red Hoodie" onclick="selectTrait('clothing', 'CLOTHING/10.PNG')">
+        <img src="CLOTHING/10A.PNG" alt="Red Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/10A.PNG')">
+        <img src="CLOTHING/11.PNG" alt="JPGPAPII Hoodie" onclick="selectTrait('clothing', 'CLOTHING/11.PNG')">
+        <img src="CLOTHING/12.PNG" alt="OLLIE Special Hoodie" onclick="selectTrait('clothing', 'CLOTHING/12.PNG')">
+        <img src="CLOTHING/13.PNG" alt="Giraffe Hoodie" onclick="selectTrait('clothing', 'CLOTHING/13.PNG')">
+        <img src="CLOTHING/14.PNG" alt="Tie-Dye Hoodie" onclick="selectTrait('clothing', 'CLOTHING/14.PNG')">
+        <img src="CLOTHING/16.PNG" alt="Knight Suit" onclick="selectTrait('clothing', 'CLOTHING/16.PNG')">
+        <img src="CLOTHING/17.PNG" alt="Pirate Suit" onclick="selectTrait('clothing', 'CLOTHING/17.PNG')">
+        <img src="CLOTHING/18.PNG" alt="Red Varsity" onclick="selectTrait('clothing', 'CLOTHING/18.PNG')">
+        <img src="CLOTHING/19.PNG" alt="Blue Varsity" onclick="selectTrait('clothing', 'CLOTHING/19.PNG')">
+        <img src="CLOTHING/21.PNG" alt="Cowboy" onclick="selectTrait('clothing', 'CLOTHING/21.PNG')">
+        <img src="CLOTHING/20.PNG" alt="Uncle Sam Suit" onclick="selectTrait('clothing', 'CLOTHING/20.PNG')">
+        <img src="CLOTHING/22.PNG" alt="Captain Jacket" onclick="selectTrait('clothing', 'CLOTHING/22.PNG')">
+      </div>
+    </div>
+    <div class="trait-category" id="accessoriesCategory">
+      <div class="trait-options">
+        <img src="GLASSES/A.PNG" alt="No Glasses" onclick="selectTrait('accessories', 'GLASSES/A.PNG')">
+        <img src="GLASSES/1.PNG" alt="Pit Vipers" onclick="selectTrait('accessories', 'GLASSES/1.PNG')">
+        <img src="GLASSES/2.PNG" alt="Ski Goggles" onclick="selectTrait('accessories', 'GLASSES/2.PNG')">
+        <img src="GLASSES/3.PNG" alt="3D Glasses" onclick="selectTrait('accessories', 'GLASSES/3.PNG')">
+        <img src="GLASSES/4.PNG" alt="Incognito" onclick="selectTrait('accessories', 'GLASSES/4.PNG')">
+        <img src="GLASSES/5.PNG" alt="Space Glasses" onclick="selectTrait('accessories', 'GLASSES/5.PNG')">
+        <img src="GLASSES/6.PNG" alt="Sunnies" onclick="selectTrait('accessories', 'GLASSES/6.PNG')">
+        <img src="GLASSES/7.PNG" alt="John Lennons" onclick="selectTrait('accessories', 'GLASSES/7.PNG')">
+      </div>
+    </div>
+    <div class="trait-category" id="hatCategory">
+      <div class="trait-options">
+        <img src="HATS/A.PNG" alt="No Hat" onclick="selectTrait('hat', 'HATS/A.PNG')">
+        <img src="HATS/1.PNG" alt="Blue Beanie" onclick="selectTrait('hat', 'HATS/1.PNG')">
+        <img src="HATS/2.PNG" alt="Black Beanie" onclick="selectTrait('hat', 'HATS/2.PNG')">
+        <img src="HATS/4.PNG" alt="White Beanie" onclick="selectTrait('hat', 'HATS/4.PNG')">
+        <img src="HATS/3.PNG" alt="Green Beanie" onclick="selectTrait('hat', 'HATS/3.PNG')">
+        <img src="HATS/33.PNG" alt="JPGPAPII Hat" onclick="selectTrait('hat', 'HATS/33.PNG')">
+        <img src="HATS/15.PNG" alt="White Sideways Hat" onclick="selectTrait('hat', 'HATS/15.PNG')">
+        <img src="HATS/16.PNG" alt="Blonde Sideways Hat" onclick="selectTrait('hat', 'HATS/16.PNG')">
+        <img src="HATS/17.PNG" alt="Brown Sideways Hat" onclick="selectTrait('hat', 'HATS/17.PNG')">
+        <img src="HATS/18.PNG" alt="Black Sideways Hat" onclick="selectTrait('hat', 'HATS/18.PNG')">
+        <img src="HATS/19.PNG" alt="White Hair Red Backwards Hat" onclick="selectTrait('hat', 'HATS/19.PNG')">
+        <img src="HATS/20.PNG" alt="White Hair Black Backwards Hat" onclick="selectTrait('hat', 'HATS/20.PNG')">
+        <img src="HATS/21.PNG" alt="White Hair Blue Backwards Hat" onclick="selectTrait('hat', 'HATS/21.PNG')">
+        <img src="HATS/39.PNG" alt="White Hair Cowboy" onclick="selectTrait('hat', 'HATS/39.PNG')">
+        <img src="HATS/22.PNG" alt="Blonde Hair Red Backwards Hat" onclick="selectTrait('hat', 'HATS/22.PNG')">
+        <img src="HATS/23.PNG" alt="Blonde Hair Black Backwards Hat" onclick="selectTrait('hat', 'HATS/23.PNG')">
+        <img src="HATS/24.PNG" alt="Blonde Hair Blue Backwards Hat" onclick="selectTrait('hat', 'HATS/24.PNG')">
+        <img src="HATS/38.PNG" alt="Blonde Hair Cowboy" onclick="selectTrait('hat', 'HATS/38.PNG')">
+        <img src="HATS/25.PNG" alt="Brown Hair Red Backwards Hat" onclick="selectTrait('hat', 'HATS/25.PNG')">
+        <img src="HATS/26.PNG" alt="Brown Hair Black Backwards Hat" onclick="selectTrait('hat', 'HATS/26.PNG')">
+        <img src="HATS/27.PNG" alt="Brown Hair Blue Backwards Hat" onclick="selectTrait('hat', 'HATS/27.PNG')">
+        <img src="HATS/40.PNG" alt="Brown Hair Cowboy" onclick="selectTrait('hat', 'HATS/40.PNG')">
+        <img src="HATS/28.PNG" alt="Black Hair Red Backwards Hat" onclick="selectTrait('hat', 'HATS/28.PNG')">
+        <img src="HATS/29.PNG" alt="Black Hair Black Backwards Hat" onclick="selectTrait('hat', 'HATS/29.PNG')">
+        <img src="HATS/30.PNG" alt="Black Hair Blue Backwards Hat" onclick="selectTrait('hat', 'HATS/30.PNG')">
+        <img src="HATS/41.PNG" alt="Black Hair Cowboy" onclick="selectTrait('hat', 'HATS/41.PNG')">
+        <img src="HATS/31.PNG" alt="Knight Helmet 1" onclick="selectTrait('hat', 'HATS/31.PNG')">
+        <img src="HATS/32.PNG" alt="Knight Helmet 2" onclick="selectTrait('hat', 'HATS/32.PNG')">
+        <img src="HATS/35.PNG" alt="Pirate Hat" onclick="selectTrait('hat', 'HATS/35.PNG')">
+        <img src="HATS/34.PNG" alt="Pirate Hat/Eyepatch" onclick="selectTrait('hat', 'HATS/34.PNG')">
+        <img src="HATS/7.PNG" alt="Taco Hat" onclick="selectTrait('hat', 'HATS/7.PNG')">
+        <img src="HATS/36.PNG" alt="Fireman Hat" onclick="selectTrait('hat', 'HATS/36.PNG')">
+        <img src="HATS/37.PNG" alt="Wizard" onclick="selectTrait('hat', 'HATS/37.PNG')">
+        <img src="HATS/42.PNG" alt="Halo" onclick="selectTrait('hat', 'HATS/42.PNG')">
+        <img src="HATS/43.PNG" alt="Captain Hat" onclick="selectTrait('hat', 'HATS/43.PNG')">
+      </div>
+    </div>
+    <div class="trait-category" id="handCategory">
+      <div class="trait-options">
+        <img src="HANDS/AA.PNG" alt="No Hand Gesture" onclick="selectTrait('hand', 'HANDS/AA.PNG')">
+        <img src="HANDS/12.PNG" alt="Skin 1 Shaka" onclick="selectTrait('hand', 'HANDS/12.PNG')">
+        <img src="HANDS/13.PNG" alt="Skin 2 Shaka" onclick="selectTrait('hand', 'HANDS/13.PNG')">
+        <img src="HANDS/14.PNG" alt="Skin 3 Shaka" onclick="selectTrait('hand', 'HANDS/14.PNG')">
+        <img src="HANDS/15.PNG" alt="Skin 4 Shaka" onclick="selectTrait('hand', 'HANDS/15.PNG')">
+        <img src="HANDS/8.PNG" alt="Skin 1 Double Shaka" onclick="selectTrait('hand', 'HANDS/8.PNG')">
+        <img src="HANDS/9.PNG" alt="Skin 2 Double Shaka" onclick="selectTrait('hand', 'HANDS/9.PNG')">
+        <img src="HANDS/10.PNG" alt="Skin 3 Double Shaka" onclick="selectTrait('hand', 'HANDS/10.PNG')">
+        <img src="HANDS/11.PNG" alt="Skin 4 Double Shaka" onclick="selectTrait('hand', 'HANDS/11.PNG')">
+        <img src="HANDS/16.PNG" alt="Skin 1 Rock-On" onclick="selectTrait('hand', 'HANDS/16.PNG')">
+        <img src="HANDS/17.PNG" alt="Skin 2 Rock-On" onclick="selectTrait('hand', 'HANDS/17.PNG')">
+        <img src="HANDS/18.PNG" alt="Skin 3 Rock-On" onclick="selectTrait('hand', 'HANDS/18.PNG')">
+        <img src="HANDS/19.PNG" alt="Skin 4 Rock-On" onclick="selectTrait('hand', 'HANDS/19.PNG')">
+        <img src="HANDS/20.PNG" alt="Skin 1 Spot-On" onclick="selectTrait('hand', 'HANDS/20.PNG')">
+        <img src="HANDS/21.PNG" alt="Skin 2 Spot-On" onclick="selectTrait('hand', 'HANDS/21.PNG')">
+        <img src="HANDS/22.PNG" alt="Skin 3 Spot-On" onclick="selectTrait('hand', 'HANDS/22.PNG')">
+        <img src="HANDS/23.PNG" alt="Skin 4 Spot-On" onclick="selectTrait('hand', 'HANDS/23.PNG')">
+        <img src="HANDS/1.PNG" alt="Skin 1 Gaming Controller" onclick="selectTrait('hand', 'HANDS/1.PNG')">
+        <img src="HANDS/1A.PNG" alt="Skin 2 Gaming Controller" onclick="selectTrait('hand', 'HANDS/1A.PNG')">
+        <img src="HANDS/1B.PNG" alt="Skin 3 Gaming Controller" onclick="selectTrait('hand', 'HANDS/1B.PNG')">
+        <img src="HANDS/1C.PNG" alt="Skin 4 Gaming Controller" onclick="selectTrait('hand', 'HANDS/1C.PNG')">
+        <img src="HANDS/2.PNG" alt="Skin 1 Snowball" onclick="selectTrait('hand', 'HANDS/2.PNG')">
+        <img src="HANDS/2A.PNG" alt="Skin 2 Snowball" onclick="selectTrait('hand', 'HANDS/2A.PNG')">
+        <img src="HANDS/2B.PNG" alt="Skin 3 Snowball" onclick="selectTrait('hand', 'HANDS/2B.PNG')">
+        <img src="HANDS/2C.PNG" alt="Skin 4 Snowball" onclick="selectTrait('hand', 'HANDS/2C.PNG')">
+        <img src="HANDS/3.PNG" alt="Skin 1 Baseball" onclick="selectTrait('hand', 'HANDS/3.PNG')">
+        <img src="HANDS/3A.PNG" alt="Skin 2 Baseball" onclick="selectTrait('hand', 'HANDS/3A.PNG')">
+        <img src="HANDS/3B.PNG" alt="Skin 3 Baseball" onclick="selectTrait('hand', 'HANDS/3B.PNG')">
+        <img src="HANDS/3C.PNG" alt="Skin 4 Baseball" onclick="selectTrait('hand', 'HANDS/3C.PNG')">
+        <img src="HANDS/4.PNG" alt="Skin 1 Finger (For Ball)" onclick="selectTrait('hand', 'HANDS/4.PNG')">
+        <img src="HANDS/5.PNG" alt="Skin 2 Finger (For Ball)" onclick="selectTrait('hand', 'HANDS/5.PNG')">
+        <img src="HANDS/6.PNG" alt="Skin 3 Finger (For Ball)" onclick="selectTrait('hand', 'HANDS/6.PNG')">
+        <img src="HANDS/7.PNG" alt="Skin 4 Finger (For Ball)" onclick="selectTrait('hand', 'HANDS/7.PNG')">
+      </div>
+    </div>
+    <div class="trait-category" id="ballCategory">
+      <div class="trait-options">
+        <img src="HAND-BALLS/A.PNG" alt="No Ball" onclick="selectTrait('ball', 'HAND-BALLS/A.PNG')">
+        <img src="HAND-BALLS/1.PNG" alt="Soccer Ball" onclick="selectTrait('ball', 'HAND-BALLS/1.PNG')">
+        <img src="HAND-BALLS/2.PNG" alt="Basketball" onclick="selectTrait('ball', 'HAND-BALLS/2.PNG')">
+      </div>
+    </div>
+    <div class="trait-category" id="backgroundCategory">
+      <div class="trait-options">
+        <img src="BACKGROUNDS/1.PNG" alt="No Background" onclick="selectTrait('background', 'BACKGROUNDS/1.PNG')">
+        <img src="BACKGROUNDS/IMG_1529.PNG" alt="Peach" onclick="selectTrait('background', 'BACKGROUNDS/IMG_1529.PNG')">
+        <img src="BACKGROUNDS/IMG_1530.PNG" alt="Red" onclick="selectTrait('background', 'BACKGROUNDS/IMG_1530.PNG')">
+        <img src="BACKGROUNDS/IMG_1531.PNG" alt="Green" onclick="selectTrait('background', 'BACKGROUNDS/IMG_1531.PNG')">
+        <img src="BACKGROUNDS/IMG_1532.PNG" alt="Yellow" onclick="selectTrait('background', 'BACKGROUNDS/IMG_1532.PNG')">
+        <img src="BACKGROUNDS/2.PNG" alt="Brownish" onclick="selectTrait('background', 'BACKGROUNDS/2.PNG')">
+        <img src="BACKGROUNDS/3.PNG" alt="White" onclick="selectTrait('background', 'BACKGROUNDS/3.PNG')">
+        <img src="BACKGROUNDS/4.PNG" alt="Mintish" onclick="selectTrait('background', 'BACKGROUNDS/4.PNG')">
+        <img src="BACKGROUNDS/13.PNG" alt="Bright Green" onclick="selectTrait('background', 'BACKGROUNDS/13.PNG')">
+        <img src="BACKGROUNDS/5.PNG" alt="Purple" onclick="selectTrait('background', 'BACKGROUNDS/5.PNG')">
+        <img src="BACKGROUNDS/6.PNG" alt="Browny/Greeny" onclick="selectTrait('background', 'BACKGROUNDS/6.PNG')">
+        <img src="BACKGROUNDS/7.PNG" alt="Blue" onclick="selectTrait('background', 'BACKGROUNDS/7.PNG')">
+        <img src="BACKGROUNDS/8.PNG" alt="Grey" onclick="selectTrait('background', 'BACKGROUNDS/8.PNG')">
+        <img src="BACKGROUNDS/9.PNG" alt="Pink" onclick="selectTrait('background', 'BACKGROUNDS/9.PNG')">
+        <img src="BACKGROUNDS/10.PNG" alt="Funky1" onclick="selectTrait('background', 'BACKGROUNDS/10.PNG')">
+        <img src="BACKGROUNDS/11.PNG" alt="Funky2" onclick="selectTrait('background', 'BACKGROUNDS/11.PNG')">
+        <img src="BACKGROUNDS/12.PNG" alt="Funky3" onclick="selectTrait('background', 'BACKGROUNDS/12.PNG')">
+        <img src="BACKGROUNDS/14.PNG" alt="Night Sky" onclick="selectTrait('background', 'BACKGROUNDS/14.PNG')">
+        <img src="BACKGROUNDS/15.PNG" alt="Checkers" onclick="selectTrait('background', 'BACKGROUNDS/15.PNG')">
+        <img src="BACKGROUNDS/16.PNG" alt="Cotton Candy" onclick="selectTrait('background', 'BACKGROUNDS/16.PNG')">
+        <img src="BACKGROUNDS/17.PNG" alt="Beautiful Day" onclick="selectTrait('background', 'BACKGROUNDS/17.PNG')">
+        <img src="BACKGROUNDS/18.PNG" alt="Marshmallow" onclick="selectTrait('background', 'BACKGROUNDS/18.PNG')">
+        <img src="BACKGROUNDS/19.PNG" alt="Anonymous" onclick="selectTrait('background', 'BACKGROUNDS/19.PNG')">
+        <img src="BACKGROUNDS/20.PNG" alt="Devilish" onclick="selectTrait('background', 'BACKGROUNDS/20.PNG')">
+      </div>
+    </div>
+  </div>
 </div>
 
-
-
-    <!-- JavaScript and html2canvas setup -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script>
-        function selectTrait(category, filename) {
-            if (filename) {
-                document.getElementById(category).src = filename;
-            }
+<!-- JavaScript and html2canvas setup -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    function selectTrait(category, filename) {
+        if (filename) {
+            document.getElementById(category).src = filename;
         }
+    }
 
-        function saveCharacterImage() {
-            html2canvas(document.getElementById("characterDisplay"), {scale: 1}).then(canvas => {
-                let link = document.createElement('a');
-                link.download = 'my-character.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            }).catch(error => console.error('Error capturing canvas:', error));
-        }
-    </script>
+    function showCategory(categoryId) {
+        document.querySelectorAll('.trait-category').forEach(category => {
+            category.classList.remove('active');
+        });
+        document.getElementById(categoryId).classList.add('active');
+    }
+
+    function saveCharacterImage() {
+        html2canvas(document.getElementById("characterDisplay"), {scale: 1}).then(canvas => {
+            let link = document.createElement('a');
+            link.download = 'my-character.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }).catch(error => console.error('Error capturing canvas:', error));
+    }
+</script>
 </body>
 </html>
