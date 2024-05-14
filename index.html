@@ -80,6 +80,8 @@ body {
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-height: 300px; /* Adjust the height to fit 2 rows */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 .trait-category {
     display: none;
@@ -119,6 +121,11 @@ button:hover {
 #saveButton {
     margin-top: 20px;
 }
+@media (max-width: 768px) {
+    #traitOptions {
+        grid-template-columns: repeat(6, 1fr); /* Adjust for smaller screens */
+    }
+}
 </style>
 </head>
 <body>
@@ -126,15 +133,15 @@ button:hover {
 <img id="headerImage" src="HEADER/1.PNG" alt="CREATE YOUR OWN LITTLE OLLIE">
 
 <div id="traitSelection">
-  <button class="category-button" onclick="showCategory('skinCategory')">Skin</button>
-  <button class="category-button" onclick="showCategory('faceCategory')">Face</button>
-  <button class="category-button" onclick="showCategory('hairCategory')">Hair</button>
-  <button class="category-button" onclick="showCategory('clothingCategory')">Clothing</button>
-  <button class="category-button" onclick="showCategory('accessoriesCategory')">Accessories</button>
-  <button class="category-button" onclick="showCategory('hatCategory')">Hats</button>
-  <button class="category-button" onclick="showCategory('handCategory')">Hand Gestures</button>
-  <button class="category-button" onclick="showCategory('ballCategory')">Balls</button>
-  <button class="category-button" onclick="showCategory('backgroundCategory')">Backgrounds</button>
+  <button class="category-button" onclick="showCategory('backgroundCategory')">BACKGROUNDS</button>
+  <button class="category-button" onclick="showCategory('skinCategory')">SKIN</button>
+  <button class="category-button" onclick="showCategory('faceCategory')">FACE</button>
+  <button class="category-button" onclick="showCategory('hairCategory')">HAIR</button>
+  <button class="category-button" onclick="showCategory('clothingCategory')">CLOTHING</button>
+  <button class="category-button" onclick="showCategory('accessoriesCategory')">SUNGLASSES</button>
+  <button class="category-button" onclick="showCategory('hatCategory')">HATS</button>
+  <button class="category-button" onclick="showCategory('handCategory')">HAND GESTURES</button>
+  <button class="category-button" onclick="showCategory('ballCategory')">BALLS</button>
 </div>
 
 <div id="traitPictures">
