@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Character Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    background-image: linear-gradient(to right, #89f7fe, #66a6ff);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+#headerImage {
+    margin-top: 5px;
+    width: auto;
+    height: 300px;
+}
+#traitSelection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(to right, #89f7fe, #66a6ff);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.trait-category {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 0;
+}
+.trait-category img {
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+.trait-category img:hover {
+    border: 2px solid #666;
+}
+#characterDisplay {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border: 3px solid #666;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+#characterDisplay img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+</style>
+</head>
+<body>
+<!-- Image used as a header -->
+<img id="headerImage" src="HEADER/1.PNG" alt="CREATE YOUR OWN LITTLE OLLIE">
+
+<div id="traitSelection">
+  <div class="trait-category" id="backgroundCategory">
+    <h3>Backgrounds</h3>
+    <img src="BACKGROUNDS/1.PNG" alt="No Background" onclick="selectTrait('background', 'BACKGROUNDS/1.PNG')">
+    <img src="BACKGROUNDS/IMG_1529.PNG" alt="Peach" onclick="selectTrait('background', 'BACKGROUNDS/IMG_1529.PNG')">
+    <!-- Add more background options here -->
+  </div>
+  <div class="trait-category" id="skinCategory">
+    <h3>Skin</h3>
+    <img src="SKIN/A.PNG" alt="No Skin" onclick="selectTrait('skin', 'SKIN/A.PNG')">
+    <img src="SKIN/1.PNG" alt="Skin 1" onclick="selectTrait('skin', 'SKIN/1.PNG')">
+    <!-- Add more skin options here -->
+  </div>
+  <div class="trait-category" id="faceCategory">
+    <h3>Face</h3>
+    <img src="FACE/A.PNG" alt="No Face" onclick="selectTrait('face', 'FACE/A.PNG')">
+    <img src="FACE/1.PNG" alt="Happy 1" onclick="selectTrait('face', 'FACE/1.PNG')">
+    <!-- Add more face options here -->
+  </div>
+  <div class="trait-category" id="hairCategory">
+    <h3>Hair</h3>
+    <img src="HAIR/A.PNG" alt="No Hair" onclick="selectTrait('hair', 'HAIR/A.PNG')">
+    <img src="HAIR/29.PNG" alt="White 1" onclick="selectTrait('hair', 'HAIR/29.PNG')">
+    <!-- Add more hair options here -->
+  </div>
+  <div class="trait-category" id="clothingCategory">
+    <h3>Clothing</h3>
+    <img src="CLOTHING/A.PNG" alt="No Clothing" onclick="selectTrait('clothing', 'CLOTHING/A.PNG')">
+    <img src="CLOTHING/1.PNG" alt="White Hoodie" onclick="selectTrait('clothing', 'CLOTHING/1.PNG')">
+    <!-- Add more clothing options here -->
+  </div>
+  <div class="trait-category" id="accessoriesCategory">
+    <h3>Accessories</h3>
+    <img src="GLASSES/A.PNG" alt="No Glasses" onclick="selectTrait('accessories', 'GLASSES/A.PNG')">
+    <img src="GLASSES/1.PNG" alt="Pit Vipers" onclick="selectTrait('accessories', 'GLASSES/1.PNG')">
+    <!-- Add more accessories options here -->
+  </div>
+  <div class="trait-category" id="hatCategory">
+    <h3>Hats</h3>
+    <img src="HATS/A.PNG" alt="No Hat" onclick="selectTrait('hat', 'HATS/A.PNG')">
+    <img src="HATS/1.PNG" alt="Blue Beanie" onclick="selectTrait('hat', 'HATS/1.PNG')">
+    <!-- Add more hat options here -->
+  </div>
+  <div class="trait-category" id="handCategory">
+    <h3>Hand Gestures</h3>
+    <img src="HANDS/AA.PNG" alt="No Hand Gesture" onclick="selectTrait('hand', 'HANDS/AA.PNG')">
+    <img src="HANDS/12.PNG" alt="Skin 1 Shaka" onclick="selectTrait('hand', 'HANDS/12.PNG')">
+    <!-- Add more hand options here -->
+  </div>
+  <div class="trait-category" id="ballCategory">
+    <h3>Balls</h3>
+    <img src="HAND-BALLS/A.PNG" alt="No Ball" onclick="selectTrait('ball', 'HAND-BALLS/A.PNG')">
+    <img src="HAND-BALLS/1.PNG" alt="Soccer Ball" onclick="selectTrait('ball', 'HAND-BALLS/1.PNG')">
+    <!-- Add more ball options here -->
+  </div>
+</div>
+
+<div id="characterDisplay">
+  <img id="background" src="" alt="">
+  <img id="skin" src="" alt="">
+  <img id="face" src="" alt="">
+  <img id="hair" src="" alt="">
+  <img id="hat" src="" alt="">
+  <img id="clothing" src="" alt="">
+  <img id="accessories" src="" alt="">
+  <img id="hand" src="" alt="">
+  <img id="ball" src="" alt="">
+</div>
+
+<!-- JavaScript and html2canvas setup -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    function selectTrait(category, filename) {
+        if (filename) {
+            document.getElementById(category).src = filename;
+        }
+    }
+
+    function saveCharacterImage() {
+        html2canvas(document.getElementById("characterDisplay"), {scale: 1}).then(canvas => {
+            let link = document.createElement('a');
+            link.download = 'my-character.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }).catch(error => console.error('Error capturing canvas:', error));
+    }
+</script>
+</body>
+</html>
