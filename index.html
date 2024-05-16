@@ -27,19 +27,22 @@ body {
     align-items: flex-start;
     width: 100%;
     margin-top: 20px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 #traitSelection {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 20px;
     background: linear-gradient(to bottom, #89f7fe, #66a6ff);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-right: 20px;
+    width: 100%; /* Full width */
+    margin-bottom: 20px; /* Spacing below the buttons */
 }
 .category-button {
-    margin: 5px 0;
+    margin: 5px;
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 10px;
@@ -89,11 +92,12 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0 20px;
+    order: 2; /* Order for display */
 }
 #characterDisplay {
     position: relative;
-    width: 700px;
-    height: 700px;
+    width: 600px;
+    height: 600px;
     border: 0px solid #666;
     background-color: #fff;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
@@ -115,6 +119,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin-left: 20px;
+    order: 3; /* Order for display */
 }
 .trait-category {
     display: none;
@@ -125,7 +130,7 @@ body {
 }
 .trait-options {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Set to 2 columns */
+    grid-template-columns: repeat(3, 1fr); /* Set to 3 columns */
     justify-items: center;
     margin: 10px 0;
     background: linear-gradient(to bottom, #89f7fe, #66a6ff); /* Updated background */
@@ -178,8 +183,6 @@ button:hover {
 <body>
 <!-- Image used as a header -->
 <img id="headerImage" src="HEADER/1.PNG" alt="CREATE YOUR OWN LITTLE OLLIE">
-
-
 
 <div id="mainContent">
     <div id="traitSelection">
