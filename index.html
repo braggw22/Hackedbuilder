@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Character Creator</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 <style>
 body {
-    font-family: 'Baloo 2', cursive;
+    font-family: 'Fredoka One', cursive, sans-serif; /* Updated font-family */
     background-image: linear-gradient(to right, #89f7fe, #66a6ff);
     color: #333;
     margin: 0;
@@ -30,21 +30,22 @@ body {
     flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 #traitSelection {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four columns */
+    grid-template-rows: repeat(3, auto); /* Three rows */
+    gap: 0px; /* Spacing between buttons */
+    justify-items: center;
+    padding: 0px;
     background: linear-gradient(to bottom, #89f7fe, #66a6ff);
     border-radius: 60px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     width: 100%; /* Full width */
-    margin-bottom: 20px; /* Spacing below the buttons */
+    margin-bottom: 10px; /* Spacing below the buttons */
 }
 .category-button {
     margin: 5px;
     padding: 10px 20px;
-    font-size: 28px;
+    font-size: 23px; /* Adjusted font size */
     border-radius: 30px;
     color: white;
     border: none;
@@ -53,39 +54,41 @@ body {
 .category-button:hover {
     opacity: 0.8;
 }
-
 .background-button {
     background-color: #3498db; /* Blue */
 }
 .skin-button {
-    background-color: #e74c3c; /* Red */
+    background-color: #3498db; /* Blue */
 }
 .face-button {
-    background-color: #9b59b6; /* Purple */
+    background-color: #3498db; /* Blue */
 }
 .clothing-button {
     background-color: #2ecc71; /* Green */
 }
 .hair-button {
-    background-color: #f39c12; /* Orange */
+    background-color: #2ecc71; /* Green */
 }
 .hairhoodie-button {
-    background-color: #d35400; /* Dark Orange */
+    background-color: #c0392b; /* Dark Red */
 }
 .accessories-button {
-    background-color: #1abc9c; /* Turquoise */
+    background-color: #d35400; /* Dark Orange */
 }
 .hat-button {
-    background-color: #e67e22; /* Carrot */
+    background-color: #2ecc71; /* Green */
 }
 .hathoodie-button {
     background-color: #c0392b; /* Dark Red */
 }
+.hoodieup-button {
+    background-color: #c0392b; /* Dark Red */
+}
 .hand-button {
-    background-color: #34495e; /* Dark Blue */
+    background-color: #d35400; /* Dark Orange */
 }
 .ball-button {
-    background-color: #16a085; /* Greenish */
+    background-color: #d35400; /* Dark Orange */
 }
 #characterDisplayContainer {
     display: flex;
@@ -152,7 +155,7 @@ body {
 button {
     margin: 10px;
     padding: 15px 30px;
-    font-size: 28px;
+    font-size: 30px;
     border-radius: 30px;
     background-color: #f39c12;
     color: white;
@@ -166,6 +169,9 @@ button:hover {
     margin-top: 20px;
 }
 @media (max-width: 768px) {
+    body {
+        background-image: linear-gradient(to bottom, #89f7fe, #66a6ff); /* Adjust background for smaller screens */
+    }
     #traitOptions {
         grid-template-columns: repeat(1, 1fr); /* Adjust for smaller screens */
     }
@@ -173,31 +179,67 @@ button:hover {
         flex-direction: column; /* Stack the content vertically on smaller screens */
         align-items: center;
     }
-    #traitSelection, #traitPictures {
+    #traitSelection {
         margin: 10px 0; /* Add margin for separation */
+        width: 90%; /* Full width for smaller screens */
+    }
+    .category-button {
+        flex: 1 1 calc(50% - 10px); /* Flex layout for buttons on smaller screens */
+        max-width: calc(50% - 10px); /* Max width for buttons on smaller screens */
+    }
+    #traitPictures {
+        margin: 10px 0; /* Add margin for separation */
+        width: 90%; /* Full width for smaller screens */
     }
     #characterDisplayContainer {
         margin: 0; /* Remove side margins */
+        width: 90%; /* Full width for smaller screens */
     }
+    #characterDisplay {
+        width: 100%; /* Full width for smaller screens */
+        height: auto; /* Adjust height for smaller screens */
+    }
+    #traitPictures {
+        width: 100%; /* Full width for smaller screens */
+        height: auto; /* Adjust height for smaller screens */
+    }
+}
+#randomButton {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#randomButton:hover {
+    background-color: #e67e22;
 }
 </style>
 </head>
 <body>
 <!-- Image used as a header -->
 <img id="headerImage" src="HEADER/1.PNG" alt="CREATE YOUR OWN LITTLE OLLIE">
+<button id="randomButton" onclick="randomizeTraits()">Randomize</button>
 
 <div id="mainContent">
     <div id="traitSelection">
         <button class="category-button background-button" onclick="showCategory('backgroundCategory')">BACKGROUNDS</button>
-        <button class="category-button skin-button" onclick="showCategory('skinCategory')">SKIN</button>
-        <button class="category-button face-button" onclick="showCategory('faceCategory')">FACE</button>
         <button class="category-button clothing-button" onclick="showCategory('clothingCategory')">CLOTHING</button>
-        <button class="category-button hair-button" onclick="showCategory('hairCategory')">HAIR(HOODIE DOWN)</button>
-        <button class="category-button hairhoodie-button" onclick="showCategory('hairhoodieCategory')">HAIR(HOODIE UP)</button>
-        <button class="category-button hat-button" onclick="showCategory('hatCategory')">HATS</button>
-        <button class="category-button hathoodie-button" onclick="showCategory('hathoodieCategory')">HATS(HOODIE UP)</button>
+        <button class="category-button hoodieup-button" onclick="showCategory('hoodieupCategory')">HOODIES</button>
         <button class="category-button accessories-button" onclick="showCategory('accessoriesCategory')">SUNGLASSES</button>
+        <button class="category-button skin-button" onclick="showCategory('skinCategory')">SKIN TONE</button>
+        <button class="category-button hair-button" onclick="showCategory('hairCategory')">HAIRSTYLES</button>
+        <button class="category-button hairhoodie-button" onclick="showCategory('hairhoodieCategory')">HAIRSTYLE (HOODIES)</button>
         <button class="category-button hand-button" onclick="showCategory('handCategory')">HAND GESTURES</button>
+        <button class="category-button face-button" onclick="showCategory('faceCategory')">FACE</button>
+        <button class="category-button hat-button" onclick="showCategory('hatCategory')">HEADWEAR</button>
+        <button class="category-button hathoodie-button" onclick="showCategory('hathoodieCategory')">HATS(HOODIES)</button>
         <button class="category-button ball-button" onclick="showCategory('ballCategory')">BALLS</button>
     </div>
 
@@ -243,8 +285,7 @@ button:hover {
                 <img src="BACKGROUNDS/18.PNG" alt="Marshmallow" onclick="selectTrait('background', 'BACKGROUNDS/18.PNG')">
                 <img src="BACKGROUNDS/19.PNG" alt="Anonymous" onclick="selectTrait('background', 'BACKGROUNDS/19.PNG')">
                 <img src="BACKGROUNDS/20.PNG" alt="Devilish" onclick="selectTrait('background', 'BACKGROUNDS/20.PNG')">
-                <img src="BACKGROUNDS/21.PNG" alt="Devilish" onclick="selectTrait('background', 'BACKGROUNDS/21.PNG')">
-                <img src="BACKGROUNDS/22.PNG" alt="Devilish" onclick="selectTrait('background', 'BACKGROUNDS/22.PNG')">
+                <img src="BACKGROUNDS/21.PNG" alt="Vintage" onclick="selectTrait('background', 'BACKGROUNDS/21.PNG')">
             </div>
         </div>
         <div class="trait-category" id="skinCategory">
@@ -340,37 +381,21 @@ button:hover {
         <div class="trait-category" id="clothingCategory">
             <div class="trait-options">
                 <img src="CLOTHING/1.PNG" alt="White Hoodie" onclick="selectTrait('clothing', 'CLOTHING/1.PNG')">
-                <img src="CLOTHING/1A.PNG" alt="White Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/1A.PNG')">
                 <img src="CLOTHING/2.PNG" alt="Black Hoodie" onclick="selectTrait('clothing', 'CLOTHING/2.PNG')">
-                <img src="CLOTHING/2A.PNG" alt="Black Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/2A.PNG')">
                 <img src="CLOTHING/6.PNG" alt="Grey Hoodie" onclick="selectTrait('clothing', 'CLOTHING/6.PNG')">
-                <img src="CLOTHING/6A.PNG" alt="Grey Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/6A.PNG')">
                 <img src="CLOTHING/4.PNG" alt="Maroon Hoodie" onclick="selectTrait('clothing', 'CLOTHING/4.PNG')">
-                <img src="CLOTHING/4A.PNG" alt="Maroon Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/4A.PNG')">
                 <img src="CLOTHING/5.PNG" alt="Charcoal Hoodie" onclick="selectTrait('clothing', 'CLOTHING/5.PNG')">
-                <img src="CLOTHING/5A.PNG" alt="Charcoal Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/5A.PNG')">
                 <img src="CLOTHING/3.PNG" alt="Blue Hoodie" onclick="selectTrait('clothing', 'CLOTHING/3.PNG')">
-                <img src="CLOTHING/3A.PNG" alt="Blue Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/3A.PNG')">
                 <img src="CLOTHING/7.PNG" alt="Green Hoodie" onclick="selectTrait('clothing', 'CLOTHING/7.PNG')">
-                <img src="CLOTHING/7A.PNG" alt="Green Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/7A.PNG')">
                 <img src="CLOTHING/8.PNG" alt="Yellow Hoodie" onclick="selectTrait('clothing', 'CLOTHING/8.PNG')">
-                <img src="CLOTHING/8A.PNG" alt="Yellow Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/8A.PNG')">
                 <img src="CLOTHING/9.PNG" alt="Orange Hoodie" onclick="selectTrait('clothing', 'CLOTHING/9.PNG')">
-                <img src="CLOTHING/9A.PNG" alt="Orange Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/9A.PNG')">
                 <img src="CLOTHING/10.PNG" alt="Red Hoodie" onclick="selectTrait('clothing', 'CLOTHING/10.PNG')">
-                <img src="CLOTHING/10A.PNG" alt="Red Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/10A.PNG')">
                 <img src="CLOTHING/11.PNG" alt="JPGPAPII Hoodie" onclick="selectTrait('clothing', 'CLOTHING/11.PNG')">
-                <img src="CLOTHING/11A.PNG" alt="JPGPAPII Hoodie" onclick="selectTrait('clothing', 'CLOTHING/11A.PNG')">
                 <img src="CLOTHING/13A.PNG" alt="Giraffe Hoodie" onclick="selectTrait('clothing', 'CLOTHING/13A.PNG')">
-                <img src="CLOTHING/13.PNG" alt="Giraffe Hoodie" onclick="selectTrait('clothing', 'CLOTHING/13.PNG')">
                 <img src="CLOTHING/27.PNG" alt="CAMO Hoodie" onclick="selectTrait('clothing', 'CLOTHING/27.PNG')">
-                <img src="CLOTHING/27A.PNG" alt="CAMO Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/27A.PNG')">
                 <img src="CLOTHING/28.PNG" alt="Charcoal Hoodie" onclick="selectTrait('clothing', 'CLOTHING/28.PNG')">
-                <img src="CLOTHING/28A.PNG" alt="TIGER Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/28A.PNG')">
                 <img src="CLOTHING/14.PNG" alt="Tie-Dye Hoodie" onclick="selectTrait('clothing', 'CLOTHING/14.PNG')">
-                <img src="CLOTHING/14A.PNG" alt="Tie-Dye Hoodie UP" onclick="selectTrait('clothing', 'CLOTHING/14A.PNG')">
                 <img src="CLOTHING/12.PNG" alt="OLLIE Special Hoodie" onclick="selectTrait('clothing', 'CLOTHING/12.PNG')">
-                <img src="CLOTHING/12A.PNG" alt="OLLIE Special Hoodie" onclick="selectTrait('clothing', 'CLOTHING/12A.PNG')">
                 <img src="CLOTHING/23.PNG" alt="Tie Dye Tee" onclick="selectTrait('clothing', 'CLOTHING/23.PNG')">
                 <img src="CLOTHING/29.PNG" alt="TEE1" onclick="selectTrait('clothing', 'CLOTHING/29.PNG')">
                 <img src="CLOTHING/30.PNG" alt="TEE2" onclick="selectTrait('clothing', 'CLOTHING/30.PNG')">
@@ -391,6 +416,26 @@ button:hover {
                 <img src="CLOTHING/21.PNG" alt="Cowboy" onclick="selectTrait('clothing', 'CLOTHING/21.PNG')">
                 <img src="CLOTHING/20.PNG" alt="Uncle Sam Suit" onclick="selectTrait('clothing', 'CLOTHING/20.PNG')">
                 <img src="CLOTHING/22.PNG" alt="Captain Jacket" onclick="selectTrait('clothing', 'CLOTHING/22.PNG')">
+            </div>
+        </div>
+        <div class="trait-category" id="hoodieupCategory">
+            <div class="trait-options">
+                <img src="CLOTHING/1A.PNG" alt="White Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/1A.PNG')">
+                <img src="CLOTHING/2A.PNG" alt="Black Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/2A.PNG')">
+                <img src="CLOTHING/6A.PNG" alt="Grey Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/6A.PNG')">
+                <img src="CLOTHING/4A.PNG" alt="Maroon Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/4A.PNG')">
+                <img src="CLOTHING/5A.PNG" alt="Charcoal Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/5A.PNG')">
+                <img src="CLOTHING/3A.PNG" alt="Blue Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/3A.PNG')">
+                <img src="CLOTHING/7A.PNG" alt="Green Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/7A.PNG')">
+                <img src="CLOTHING/8A.PNG" alt="Yellow Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/8A.PNG')">
+                <img src="CLOTHING/9A.PNG" alt="Orange Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/9A.PNG')">
+                <img src="CLOTHING/10A.PNG" alt="Red Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/10A.PNG')">
+                <img src="CLOTHING/11A.PNG" alt="JPGPAPII Hoodie" onclick="selectTrait('clothing', 'CLOTHING/11A.PNG')">
+                <img src="CLOTHING/13.PNG" alt="Giraffe Hoodie" onclick="selectTrait('clothing', 'CLOTHING/13.PNG')">
+                <img src="CLOTHING/27A.PNG" alt="CAMO Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/27A.PNG')">
+                <img src="CLOTHING/28A.PNG" alt="TIGER Hoodie Up" onclick="selectTrait('clothing', 'CLOTHING/28A.PNG')">
+                <img src="CLOTHING/14A.PNG" alt="Tie-Dye Hoodie UP" onclick="selectTrait('clothing', 'CLOTHING/14A.PNG')">
+                <img src="CLOTHING/12A.PNG" alt="OLLIE Special Hoodie" onclick="selectTrait('clothing', 'CLOTHING/12A.PNG')">           
             </div>
         </div>
         <div class="trait-category" id="accessoriesCategory">
@@ -542,6 +587,62 @@ button:hover {
             link.href = canvas.toDataURL('image/png');
             link.click();
         }).catch(error => console.error('Error capturing canvas:', error));
+    }
+
+    function randomizeTraits() {
+        const traits = {
+            background: ["BACKGROUNDS/1.PNG", "BACKGROUNDS/IMG_1529.PNG", "BACKGROUNDS/IMG_1530.PNG", "BACKGROUNDS/IMG_1531.PNG", "BACKGROUNDS/IMG_1532.PNG"],
+            skin: ["SKIN/1.PNG", "SKIN/2.PNG", "SKIN/3.PNG", "SKIN/4.PNG"],
+            face: ["FACE/1.PNG", "FACE/1A.PNG", "FACE/2.PNG", "FACE/3.PNG", "FACE/4.PNG", "FACE/5.PNG", "FACE/6.PNG", "FACE/7.PNG"],
+            clothing: ["CLOTHING/1.PNG", "CLOTHING/2.PNG", "CLOTHING/6.PNG", "CLOTHING/4.PNG", "CLOTHING/5.PNG", "CLOTHING/3.PNG", "CLOTHING/7.PNG", "CLOTHING/8.PNG", "CLOTHING/9.PNG", "CLOTHING/10.PNG", "CLOTHING/11.PNG", "CLOTHING/13A.PNG", "CLOTHING/27.PNG", "CLOTHING/28.PNG", "CLOTHING/14.PNG", "CLOTHING/12.PNG", "CLOTHING/23.PNG", "CLOTHING/29.PNG", "CLOTHING/30.PNG", "CLOTHING/31.PNG", "CLOTHING/32.PNG", "CLOTHING/34.PNG", "CLOTHING/35.PNG", "CLOTHING/36.PNG", "CLOTHING/37.PNG", "CLOTHING/38.PNG", "CLOTHING/25.PNG", "CLOTHING/24.PNG", "CLOTHING/26.PNG", "CLOTHING/16.PNG", "CLOTHING/17.PNG", "CLOTHING/18.PNG", "CLOTHING/19.PNG", "CLOTHING/21.PNG", "CLOTHING/20.PNG", "CLOTHING/22.PNG"],
+            hoodies: ["CLOTHING/1A.PNG", "CLOTHING/2A.PNG", "CLOTHING/6A.PNG", "CLOTHING/4A.PNG", "CLOTHING/5A.PNG", "CLOTHING/3A.PNG", "CLOTHING/7A.PNG", "CLOTHING/8A.PNG", "CLOTHING/9A.PNG", "CLOTHING/10A.PNG", "CLOTHING/11A.PNG", "CLOTHING/13.PNG", "CLOTHING/27A.PNG", "CLOTHING/28A.PNG", "CLOTHING/14A.PNG", "CLOTHING/12A.PNG"],
+            hair: ["HAIR/A.PNG", "HAIR/29.PNG", "HAIR/33.PNG", "HAIR/37.PNG", "HAIR/41.PNG", "HAIR/45.PNG", "HAIR/49.PNG", "HAIR/53.PNG", "HAIR/57.PNG", "HAIR/30.PNG", "HAIR/34.PNG", "HAIR/38.PNG", "HAIR/42.PNG", "HAIR/46.PNG", "HAIR/50.PNG", "HAIR/54.PNG", "HAIR/58.PNG", "HAIR/31.PNG", "HAIR/35.PNG", "HAIR/39.PNG", "HAIR/43.PNG", "HAIR/47.PNG", "HAIR/51.PNG", "HAIR/55.PNG", "HAIR/59.PNG", "HAIR/32.PNG", "HAIR/36.PNG", "HAIR/40.PNG", "HAIR/44.PNG", "HAIR/48.PNG", "HAIR/52.PNG", "HAIR/56.PNG", "HAIR/60.PNG"],
+            hairhoodies: ["HAIRHOODIEUP/A.PNG", "HAIRHOODIEUP/9.PNG", "HAIRHOODIEUP/13.PNG", "HAIRHOODIEUP/21.PNG", "HAIRHOODIEUP/17.PNG", "HAIRHOODIEUP/1.PNG", "HAIRHOODIEUP/5.PNG", "HAIRHOODIEUP/25.PNG", "HAIRHOODIEUP/10.PNG", "HAIRHOODIEUP/14.PNG", "HAIRHOODIEUP/22.PNG", "HAIRHOODIEUP/18.PNG", "HAIRHOODIEUP/2.PNG", "HAIRHOODIEUP/6.PNG", "HAIRHOODIEUP/26.PNG", "HAIRHOODIEUP/11.PNG", "HAIRHOODIEUP/15.PNG", "HAIRHOODIEUP/23.PNG", "HAIRHOODIEUP/19.PNG", "HAIRHOODIEUP/3.PNG", "HAIRHOODIEUP/7.PNG", "HAIRHOODIEUP/27.PNG", "HAIRHOODIEUP/12.PNG", "HAIRHOODIEUP/16.PNG", "HAIRHOODIEUP/24.PNG", "HAIRHOODIEUP/20.PNG", "HAIRHOODIEUP/4.PNG", "HAIRHOODIEUP/8.PNG", "HAIRHOODIEUP/28.PNG"],
+            hat: ["HATS/A.PNG", "HATS/1.PNG", "HATS/2.PNG", "HATS/4.PNG", "HATS/3.PNG", "HATS/33.PNG", "HATS/15.PNG", "HATS/16.PNG", "HATS/17.PNG", "HATS/18.PNG", "HATS/19.PNG", "HATS/20.PNG", "HATS/21.PNG", "HATS/39.PNG", "HATS/22.PNG", "HATS/23.PNG", "HATS/24.PNG", "HATS/38.PNG", "HATS/25.PNG", "HATS/26.PNG", "HATS/27.PNG", "HATS/40.PNG", "HATS/28.PNG", "HATS/29.PNG", "HATS/30.PNG", "HATS/41.PNG", "HATS/31.PNG", "HATS/32.PNG", "HATS/35.PNG", "HATS/44.PNG", "HATS/45.PNG", "HATS/34.PNG", "HATS/7.PNG", "HATS/36.PNG", "HATS/37.PNG", "HATS/42.PNG", "HATS/43.PNG"],
+            hathoodies: ["HATS/A.PNG", "HATS/1.PNG", "HATS/2.PNG", "HATS/4.PNG", "HATS/3.PNG", "HATS/33.PNG", "HATS/19.PNG", "HATS/20.PNG", "HATS/21.PNG", "HATS/22.PNG", "HATS/23.PNG", "HATS/24.PNG", "HATS/25.PNG", "HATS/26.PNG", "HATS/27.PNG", "HATS/28.PNG", "HATS/29.PNG", "HATS/30.PNG", "HATS/42.PNG"],
+            accessories: ["GLASSES/A.PNG", "GLASSES/1.PNG", "GLASSES/8.PNG", "GLASSES/9.PNG", "GLASSES/2.PNG", "GLASSES/3.PNG", "GLASSES/4.PNG", "GLASSES/5.PNG", "GLASSES/6.PNG", "GLASSES/7.PNG"],
+            hand: ["HANDS/A.PNG", "HANDS/12.PNG", "HANDS/13.PNG", "HANDS/14.PNG", "HANDS/15.PNG", "HANDS/8.PNG", "HANDS/9.PNG", "HANDS/10.PNG", "HANDS/11.PNG", "HANDS/16.PNG", "HANDS/17.PNG", "HANDS/18.PNG", "HANDS/19.PNG", "HANDS/20.PNG", "HANDS/21.PNG", "HANDS/22.PNG", "HANDS/23.PNG", "HANDS/1.PNG", "HANDS/1A.PNG", "HANDS/1B.PNG", "HANDS/1C.PNG", "HANDS/2.PNG", "HANDS/2A.PNG", "HANDS/2B.PNG", "HANDS/2C.PNG", "HANDS/3.PNG", "HANDS/3A.PNG", "HANDS/3B.PNG", "HANDS/3C.PNG", "HANDS/4.PNG", "HANDS/5.PNG", "HANDS/6.PNG", "HANDS/7.PNG"],
+            ball: ["HAND-BALLS/A.PNG", "HAND-BALLS/1.PNG", "HAND-BALLS/2.PNG"]
+        };
+
+        // Pick random background, skin, and face
+        selectTrait('background', getRandomElement(traits.background));
+        const selectedSkin = getRandomElement(traits.skin);
+        selectTrait('skin', selectedSkin);
+        selectTrait('face', getRandomElement(traits.face));
+
+        // Randomly pick between combination 1 and combination 2
+        const combination = Math.random() < 0.5 ? 1 : 2;
+
+        if (combination === 1) {
+            selectTrait('clothing', getRandomElement(traits.clothing));
+            selectTrait('hair', getRandomElement(traits.hair));
+            selectTrait('hat', getRandomElement(traits.hat));
+        } else {
+            selectTrait('clothing', getRandomElement(traits.hoodies));
+            selectTrait('hair', getRandomElement(traits.hairhoodies));
+            selectTrait('hat', getRandomElement(traits.hathoodies));
+        }
+
+        // Randomly select accessories, hand, and ball
+        selectTrait('accessories', getRandomElement(traits.accessories));
+        selectTrait('hand', getMatchingHandTrait(selectedSkin, traits.hand));
+        selectTrait('ball', getRandomElement(traits.ball));
+    }
+
+    function getRandomElement(array) {
+        return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function getMatchingHandTrait(skin, handTraits) {
+        const skinMapping = {
+            "SKIN/1.PNG": ["HANDS/12.PNG", "HANDS/8.PNG", "HANDS/16.PNG", "HANDS/20.PNG", "HANDS/1.PNG", "HANDS/2.PNG", "HANDS/3.PNG", "HANDS/4.PNG"],
+            "SKIN/2.PNG": ["HANDS/13.PNG", "HANDS/9.PNG", "HANDS/17.PNG", "HANDS/21.PNG", "HANDS/1A.PNG", "HANDS/2A.PNG", "HANDS/3A.PNG", "HANDS/5.PNG"],
+            "SKIN/3.PNG": ["HANDS/14.PNG", "HANDS/10.PNG", "HANDS/18.PNG", "HANDS/22.PNG", "HANDS/1B.PNG", "HANDS/2B.PNG", "HANDS/3B.PNG", "HANDS/6.PNG"],
+            "SKIN/4.PNG": ["HANDS/15.PNG", "HANDS/11.PNG", "HANDS/19.PNG", "HANDS/23.PNG", "HANDS/1C.PNG", "HANDS/2C.PNG", "HANDS/3C.PNG", "HANDS/7.PNG"]
+        };
+
+        return getRandomElement(skinMapping[skin]);
     }
 </script>
 </body>
